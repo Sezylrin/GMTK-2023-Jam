@@ -1,0 +1,14 @@
+.label-main-title {
+    font-size: 16px;
+    -unity-font-style: bold;
+    align-items: center;
+    justify-content: center;
+    text-overflow: clip;
+    white-space: normal;
+    margin-bottom: 100px;
+    border-bottom-width: 10px;
+    border-right-width: 10px;
+    letter-spacing: 25px;
+    word-spacing: 0;
+    -unity-paragraph-spacing: 5px;
+}
