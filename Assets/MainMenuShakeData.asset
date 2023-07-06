@@ -19,10 +19,10 @@ MonoBehaviour:
   _iterationPercent: 1
   _unlimitedDuration: 1
   _totalDuration: 4
-  _fadeInDuration: 0.2
-  _fadeOutDuration: 0.2
-  _magnitude: 0.15
-  _magnitudeNoise: 0.15
+  _fadeInDuration: 0
+  _fadeOutDuration: 0
+  _magnitude: 0.5
+  _magnitudeNoise: 0
   _magnitudeCurve:
     serializedVersion: 2
     m_Curve:
@@ -47,8 +47,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _roughness: 0.15
-  _roughnessNoise: 0.01
+  _roughness: 0.1
+  _roughnessNoise: 0
   _roughnessCurve:
     serializedVersion: 2
     m_Curve:
