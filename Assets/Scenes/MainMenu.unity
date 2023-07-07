@@ -211,10 +211,22 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1703443920}
+        m_TargetAssemblyTypeName: MainSettings, Assembly-CSharp
+        m_MethodName: BGMSlider
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &17185674
 GameObject:
   m_ObjectHideFlags: 0
@@ -1849,7 +1861,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &658365532
 GameObject:
@@ -3050,7 +3062,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &960519943
 MonoBehaviour:
@@ -3640,7 +3652,7 @@ RectTransform:
   - {fileID: 438094341}
   - {fileID: 1385413546}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3811,7 +3823,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1178663729
 GameObject:
@@ -4154,7 +4166,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -5214,6 +5226,7 @@ GameObject:
   - component: {fileID: 1703443918}
   - component: {fileID: 1703443917}
   - component: {fileID: 1703443916}
+  - component: {fileID: 1703443920}
   m_Layer: 5
   m_Name: SettingsCanvas
   m_TagString: Untagged
@@ -5302,13 +5315,28 @@ RectTransform:
   - {fileID: 1806477436}
   - {fileID: 1218376867}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1703443920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1703443915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3c789754480fd04491c3c1cd2c6038d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: 412033e0a83bba34cb1679cf527622f3, type: 2}
+  BGMSlider: {fileID: 2016350}
+  SFXSlider: {fileID: 1232006441}
 --- !u!1 &1726292729
 GameObject:
   m_ObjectHideFlags: 0
@@ -5726,7 +5754,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1218376866}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!1 &1822911431
 GameObject:
@@ -6021,7 +6061,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1930690136
 GameObject:
@@ -7005,6 +7045,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: QuickIconLayout
       objectReference: {fileID: 0}
+    - target: {fileID: 19551536826049940, guid: 7229d610c7897654da08cff43d81bbd4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 125527927922923019, guid: 7229d610c7897654da08cff43d81bbd4, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -7125,6 +7169,10 @@ PrefabInstance:
       propertyPath: graphic
       value: 
       objectReference: {fileID: 1465902801}
+    - target: {fileID: 6675452891767841954, guid: 7229d610c7897654da08cff43d81bbd4, type: 3}
+      propertyPath: settingsPanel
+      value: 
+      objectReference: {fileID: 1703443915}
     - target: {fileID: 8116598685565777264, guid: 7229d610c7897654da08cff43d81bbd4, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
