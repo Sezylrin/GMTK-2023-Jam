@@ -14,5 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Fireball
   description: Fireball Description
-  type: 0
+  manaCost: 2
+  attack: 0
+  health: 0
+  type: 2
   sprite: {fileID: 21300000, guid: 1334291dbe6273d4482860c13ca69cfc, type: 3}

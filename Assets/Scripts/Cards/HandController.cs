@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class HandController : MonoBehaviour
 {
     [SerializeField] private List<GameObject> handSlots;
+    [SerializeField] private GameObject playedCardSlot;
 
-    public DeckController deck;
-    
+    private DeckController deck;
     private List<bool> handSlotsAvailable;
 
     private void Awake()
@@ -31,13 +32,13 @@ public class HandController : MonoBehaviour
         {
             if (handSlotsAvailable[i])
             {
-                GameObject instance = Instantiate(card, handSlots[i].transform);
-                instance.transform.localPosition = Vector3.zero;
+                card.GetComponent<CardController>().hoverable = true;
+                card.transform.SetParent(handSlots[i].transform, false);
+                card.transform.localPosition = Vector3.zero;
                 handSlotsAvailable[i] = false;
                 return;
             }
         }
-        Debug.LogError("No available hand slots to add the card.");
     }
 
     public void DiscardHand()
@@ -52,5 +53,44 @@ public class HandController : MonoBehaviour
                 handSlotsAvailable[i] = true;
             }
         }
+    }
+
+    public void PlayRandomCard()
+    {
+        List<int> availableCards = new List<int>();
+        for (int i = 0; i < handSlotsAvailable.Count; i++)
+        {
+            if (!handSlotsAvailable[i])
+            {
+                availableCards.Add(i);
+            }
+        }
+
+        if (availableCards.Count > 0)
+        {
+            int randomCardSelected = availableCards[UnityEngine.Random.Range(0, availableCards.Count)];
+            GameObject selectedCard = handSlots[randomCardSelected].transform.GetChild(0).gameObject;
+
+            Vector3 startCardPosition = selectedCard.transform.position;
+            Vector3 endCardPosition = playedCardSlot.transform.position;
+
+            float tweenDuration = 0.15f;
+
+            DOTween.To(() => startCardPosition, x => selectedCard.transform.position = x, endCardPosition, tweenDuration)
+                .SetEase(Ease.InOutQuad)
+                .OnComplete(() =>
+                {
+                    selectedCard.transform.SetParent(playedCardSlot.transform, false);
+                    selectedCard.transform.localPosition = Vector3.zero;
+                    selectedCard.GetComponent<CardController>().ResetCard();
+                    selectedCard.GetComponent<CardController>().hoverable = false;
+                    handSlotsAvailable[randomCardSelected] = true;
+                });
+        }
+    }
+
+    public void RemovePlayedCard()
+    {
+
     }
 }

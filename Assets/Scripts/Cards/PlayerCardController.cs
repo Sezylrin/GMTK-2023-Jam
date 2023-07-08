@@ -36,5 +36,9 @@ public class PlayerCardController : MonoBehaviour
         {
             hand.DiscardHand();
         }
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            hand.PlayRandomCard();
+        }
     }
 }

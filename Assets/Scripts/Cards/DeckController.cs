@@ -38,6 +38,7 @@ public class DeckController : MonoBehaviour
     public void ReturnCardToDrawPile(GameObject cardToReturn)
     {
         cardToReturn.SetActive(true);
+        cardToReturn.transform.SetParent(gameObject.transform, false);
         cardsInDeck.Add(cardToReturn);
     }
 }
