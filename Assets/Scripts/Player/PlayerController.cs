@@ -21,7 +21,8 @@ public class PlayerController : MonoBehaviour
 
     public float attackDelay;
     public float attackSpeed;
-    public float damage;
+    public int damage;
+    private int currentDamage;
     public GameObject weapon;
     private PolygonCollider2D weaponCollider;
 
@@ -141,8 +142,7 @@ public class PlayerController : MonoBehaviour
         {
             weaponCollider.enabled = false;
             centre.localPosition = Vector3.zero;
-        }
-            
+        }            
     }
 
     private void RotateWeapon()
@@ -156,5 +156,19 @@ public class PlayerController : MonoBehaviour
     {
         this.weapon = weapon;
         weaponCollider = this.weapon.GetComponent<PolygonCollider2D>();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag(Tags.T_Enemy))
+        {
+            Debug.Log("hitting enemy");
+            collision.GetComponent<HealthComp>().TakeDamage(damage);
+        }
     }
 }

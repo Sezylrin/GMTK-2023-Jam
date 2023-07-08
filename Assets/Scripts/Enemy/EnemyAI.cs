@@ -47,6 +47,7 @@ public class EnemyAI : MonoBehaviour
         currentState = EnemyState.chasing;
         currentMaxSpeed = maxSpeed;
         timers = new Timers((int)EnemyTimers.numberOfCD);
+        target = GameObject.FindWithTag(Tags.T_Player).transform;
     }
     void Update()
     {

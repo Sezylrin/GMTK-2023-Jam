@@ -4,37 +4,61 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
+    public static EnemyManager instance;
     // Start is called before the first frame update
-    public List<GameObject> enemies = new List<GameObject>();
+    public List<GameObject> enemyTypes = new List<GameObject>();
+    public List<GameObject> spawnedEnemies;
+    public Transform spawnCentre;
     public float separationDist;
-    public float separationForce;
+    private int enemiesSpawned;
+
+    public int spawnAmount;
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            DontDestroyOnLoad(this);
+            instance = this;
+        }
+    }
     void Start()
     {
-        GameObject[] allenemy = GameObject.FindGameObjectsWithTag(Tags.T_Enemy);
-        foreach (GameObject obj in allenemy)
-        {
-            enemies.Add(obj);
-        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        SeparateEnemy();
+    }
+    [ContextMenu("spawnenemy")]
+    public void spawnTest()
+    {
+        SpawnEnemy(spawnAmount);
     }
 
-    private void SeparateEnemy()
+    public void SpawnEnemy(int amount)
     {
-        foreach (GameObject enemy in enemies)
+        enemiesSpawned = amount;
+        for (int i = 0; i < amount; i++)
         {
-            foreach (GameObject other in enemies)
-            {
-                if (other != enemy && Vector3.Distance(enemy.transform.position,other.transform.position) < separationDist)
-                {
-                    enemy.GetComponent<Rigidbody2D>().AddForce((enemy.transform.position - other.transform.position).normalized * separationForce);
-                    other.GetComponent<Rigidbody2D>().AddForce((other.transform.position - enemy.transform.position).normalized * separationForce);
-                }
-            }
+            GameObject enemy = Instantiate(enemyTypes[Random.Range(0, enemyTypes.Count)], spawnCentre.position, Quaternion.identity);
+            Vector3 pos = enemy.transform.position;
+            pos.x = spawnCentre.position.x - (((float)amount - 1) * 0.5f * separationDist) + (i * separationDist);
+            enemy.transform.position = pos;
+            spawnedEnemies.Add(enemy);
         }
     }
+
+    public void ReduceEnemy()
+    {
+        enemiesSpawned--;
+        if (enemiesSpawned == 0)
+        {
+            //transtion to token stage
+        }
+    }
+    
 }
