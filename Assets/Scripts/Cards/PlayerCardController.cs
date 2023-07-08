@@ -5,6 +5,7 @@ public class PlayerCardController : MonoBehaviour
 {
     [SerializeField] private List<Card> cardsInDeck;
     [SerializeField] private GameObject cardPrefab;
+    [SerializeField] private GameObject test;
 
     private DeckController deck;
     private HandController hand;

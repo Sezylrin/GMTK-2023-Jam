@@ -7,9 +7,11 @@ public class HandController : MonoBehaviour
 {
     [SerializeField] private List<GameObject> handSlots;
     [SerializeField] private GameObject playedCardSlot;
+    [SerializeField] private GameObject buffZone;
 
     private DeckController deck;
     private List<bool> handSlotsAvailable;
+    private bool canPlayCard = true;
 
     private void Awake()
     {
@@ -57,6 +59,8 @@ public class HandController : MonoBehaviour
 
     public void PlayRandomCard()
     {
+        if (!canPlayCard) return;
+
         List<int> availableCards = new List<int>();
         for (int i = 0; i < handSlotsAvailable.Count; i++)
         {
@@ -68,6 +72,7 @@ public class HandController : MonoBehaviour
 
         if (availableCards.Count > 0)
         {
+            canPlayCard = false;
             int randomCardSelected = availableCards[UnityEngine.Random.Range(0, availableCards.Count)];
             GameObject selectedCard = handSlots[randomCardSelected].transform.GetChild(0).gameObject;
 
@@ -76,21 +81,25 @@ public class HandController : MonoBehaviour
 
             float tweenDuration = 0.15f;
 
-            DOTween.To(() => startCardPosition, x => selectedCard.transform.position = x, endCardPosition, tweenDuration)
-                .SetEase(Ease.InOutQuad)
+            Sequence sequence = DOTween.Sequence();
+
+            selectedCard.GetComponent<CardController>().RemoveFromHand();
+            sequence.Append(DOTween.To(() => startCardPosition, x => selectedCard.transform.position = x, endCardPosition, tweenDuration).SetEase(Ease.InOutQuad))
                 .OnComplete(() =>
                 {
                     selectedCard.transform.SetParent(playedCardSlot.transform, false);
                     selectedCard.transform.localPosition = Vector3.zero;
-                    selectedCard.GetComponent<CardController>().ResetCard();
-                    selectedCard.GetComponent<CardController>().hoverable = false;
                     handSlotsAvailable[randomCardSelected] = true;
                 });
+
+            sequence.AppendInterval(3.0f);
+            sequence.Append(selectedCard.GetComponent<CanvasGroup>().DOFade(0, 1.0f));
+            sequence.AppendCallback(() =>
+            {
+                selectedCard.transform.SetParent(buffZone.transform);
+                selectedCard.transform.localPosition = Vector3.zero;
+            });
+            sequence.Append(selectedCard.GetComponent<CanvasGroup>().DOFade(1, 1.0f));
         }
-    }
-
-    public void RemovePlayedCard()
-    {
-
     }
 }

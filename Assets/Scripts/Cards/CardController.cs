@@ -18,6 +18,7 @@ public class CardController : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     private Vector3 originalPosition;
     private RectTransform rectTransform;
     private Vector3 scale = new Vector3(1.75f, 1.75f, 1.75f);
+    private float scaleAmount = 1.75f;
     private float originalCardNameFontSize, originalDescriptionFontSize, originalManaCostFontSize, originalHealthFontSize, originalAttackFontSize;
 
     private Card card;
@@ -28,7 +29,7 @@ public class CardController : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         rectTransform = GetComponent<RectTransform>();
         originalSize = rectTransform.sizeDelta;
         originalPosition = rectTransform.localPosition;
-        hoverSize = originalSize * 1.75f;
+        hoverSize = originalSize * scaleAmount;
 
         originalCardNameFontSize = cardName.fontSize;
         originalDescriptionFontSize = description.fontSize;
@@ -77,11 +78,11 @@ public class CardController : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         rectTransform.sizeDelta = hoverSize;
         rectTransform.localPosition = originalPosition + new Vector3(0, (hoverSize.y - originalSize.y) / 2, 0);
 
-        cardName.fontSize = originalCardNameFontSize * 1.75f;
-        description.fontSize = originalDescriptionFontSize * 1.75f;
-        manaCost.fontSize = originalManaCostFontSize * 1.75f;
-        health.fontSize = originalHealthFontSize * 1.75f;
-        attack.fontSize = originalAttackFontSize * 1.75f;
+        cardName.fontSize = originalCardNameFontSize * scaleAmount;
+        description.fontSize = originalDescriptionFontSize * scaleAmount;
+        manaCost.fontSize = originalManaCostFontSize * scaleAmount;
+        health.fontSize = originalHealthFontSize * scaleAmount;
+        attack.fontSize = originalAttackFontSize * scaleAmount;
 
         attackIcon.transform.localScale = scale;
         healthIcon.transform.localScale = scale;
@@ -104,7 +105,13 @@ public class CardController : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     public void RemoveFromHand()
     {
-        ResetCard();
         hoverable = false;
+        UpdateOriginalPosition();
+        ResetCard();
+    }
+
+    public void UpdateOriginalPosition()
+    {
+        originalPosition = rectTransform.localPosition;
     }
 }

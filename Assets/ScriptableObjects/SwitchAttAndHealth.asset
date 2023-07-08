@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5e4e85e74f56fc4d86d1fa9c7f12d99, type: 3}
-  m_Name: Axe
+  m_Name: SwitchAttAndHealth
   m_EditorClassIdentifier: 
-  name: Axe
-  description: Axe Description
+  name: Health Swap
+  description: Swap the health and attack stat
   manaCost: 1
-  attack: 3
+  attack: 0
   health: 0
-  type: 1
-  sprite: {fileID: 21300000, guid: 8a6a725f703f5ed4db0cdbee0929d033, type: 3}
+  type: 0
+  info: 4
+  sprite: {fileID: 21300000, guid: 99c8439558e8195489fc90bd8c0bf442, type: 3}

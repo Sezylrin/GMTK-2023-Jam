@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5e4e85e74f56fc4d86d1fa9c7f12d99, type: 3}
-  m_Name: Fireball
+  m_Name: Spear
   m_EditorClassIdentifier: 
-  name: Fireball
-  description: A powerful single use fireball
-  manaCost: 2
-  attack: 0
+  name: Spear
+  description: A long stick to poke enemies
+  manaCost: 1
+  attack: 3
   health: 0
-  type: 2
-  info: 8
-  sprite: {fileID: 21300000, guid: 1334291dbe6273d4482860c13ca69cfc, type: 3}
+  type: 1
+  info: 6
+  sprite: {fileID: 21300000, guid: 8a6a725f703f5ed4db0cdbee0929d033, type: 3}

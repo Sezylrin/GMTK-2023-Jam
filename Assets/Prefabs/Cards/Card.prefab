@@ -918,6 +918,7 @@ GameObject:
   - component: {fileID: 8715668364069982328}
   - component: {fileID: 2343149894039879508}
   - component: {fileID: 1838342921882900590}
+  - component: {fileID: 1014523021464771903}
   m_Layer: 5
   m_Name: Card
   m_TagString: Untagged
@@ -1007,3 +1008,16 @@ MonoBehaviour:
   attack: {fileID: 5685452329600578402}
   attackIcon: {fileID: 6601621489058592855}
   healthIcon: {fileID: 2359414146080632053}
+  hoverable: 0
+--- !u!225 &1014523021464771903
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8472518037250516027}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0

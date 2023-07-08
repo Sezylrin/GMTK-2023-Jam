@@ -1,5 +1,22 @@
 using UnityEngine;
 
+public enum CardInfo
+{
+    AttackSpeedUp,
+    Healing,
+    AttackDamageUp,
+    IncreaseMovespeed,
+    SwitchDamageAndHealth,
+
+    Sword,
+    Spear,
+    Dagger,
+
+    Fireball,
+    Iceball,
+    MeteorShower,
+}
+
 public enum CardType
 {
     Powerup,
@@ -16,6 +33,7 @@ public class Card : ScriptableObject
     public int attack;
     public int health;
     public CardType type;
+    public CardInfo info;
 
     public Sprite sprite;
 }
