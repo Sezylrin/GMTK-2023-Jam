@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Animations;
 
 public class PlayerController : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class PlayerController : MonoBehaviour
     public float attackDelay;
     public float attackSpeed;
     public int damage;
+    public int baseDamage;
     private int currentDamage;
     public GameObject weapon;
     private PolygonCollider2D weaponCollider;
@@ -30,6 +32,7 @@ public class PlayerController : MonoBehaviour
 
     public Rigidbody2D rb;
     public Transform centre;
+    public Animator anim;
 
     [Header("Debug Values")]
 
@@ -44,6 +47,7 @@ public class PlayerController : MonoBehaviour
     private Camera cam;
     [SerializeField]
     private Timers timers;
+    private List<GameObject> enemiesHit = new List<GameObject>();
     // Start is called before the first frame update
     private void Awake()
     {
@@ -57,6 +61,7 @@ public class PlayerController : MonoBehaviour
         cam = Camera.main;
         currentMaxSpeed = maxSpeed;
         SetWeapon(weapon);
+        ResetDamage();
     }
 
     // Update is called once per frame
@@ -127,11 +132,14 @@ public class PlayerController : MonoBehaviour
     {
         if (!timers.time[(int)CDTimers.attackCD].Equals(0))
             return;
+        if (!GameManager.instance.currentState.Equals(gameState.fighting))
+            return;
         weaponCollider.enabled = true;
         timers.time[(int)CDTimers.attackCD] = attackDelay;
         timers.time[(int)CDTimers.attackDuration] = attackSpeed;
         Vector2 dir = (mousePos - (Vector2)transform.position).normalized;
-        centre.position += (Vector3)dir;
+        anim.Play("SwingSword");
+        //centre.position += (Vector3)dir;
         // play animation and state control in inherited classes
 
     }
@@ -141,12 +149,15 @@ public class PlayerController : MonoBehaviour
         if (timers.time[(int)CDTimers.attackDuration].Equals(0) && weaponCollider.enabled)
         {
             weaponCollider.enabled = false;
+            enemiesHit.Clear();
             centre.localPosition = Vector3.zero;
         }            
     }
 
     private void RotateWeapon()
     {
+        if (!timers.time[(int)CDTimers.attackDuration].Equals(0))
+            return;
         var dir = Input.mousePosition - cam.WorldToScreenPoint(centre.position);
         var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90;
         centre.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
@@ -158,17 +169,21 @@ public class PlayerController : MonoBehaviour
         weaponCollider = this.weapon.GetComponent<PolygonCollider2D>();
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag(Tags.T_Enemy))
         {
-            Debug.Log("hitting enemy");
-            collision.GetComponent<HealthComp>().TakeDamage(damage);
+            if (!enemiesHit.Contains(collision.gameObject))
+            {
+                enemiesHit.Add(collision.gameObject);
+                collision.GetComponent<HealthComp>().TakeDamage(currentDamage);
+            }
         }
+    }
+
+    public void ResetDamage()
+    {
+        currentDamage = damage + baseDamage;
     }
 }

@@ -9,6 +9,7 @@ public class EnemyManager : MonoBehaviour
     public List<GameObject> enemyTypes = new List<GameObject>();
     public List<GameObject> spawnedEnemies;
     public Transform spawnCentre;
+    public GameObject tokenObj;
     public float separationDist;
     private int enemiesSpawned;
 
@@ -57,8 +58,14 @@ public class EnemyManager : MonoBehaviour
         enemiesSpawned--;
         if (enemiesSpawned == 0)
         {
-            //transtion to token stage
+            Invoke("EndRound", 1);
         }
+    }
+
+    public void EndRound()
+    {
+        GameManager.instance.currentState = gameState.shop;
+        GameUI.instance.Reset();
     }
     
 }

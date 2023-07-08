@@ -5,6 +5,7 @@ public enum gameState
 {
     starting,
     drawing,
+    shop,
     fighting
 }
 public class GameManager : MonoBehaviour
@@ -12,6 +13,10 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public GameObject player;
     public int enemyHealth;
+    public gameState currentState;
+    public int tokens;
+    public int startingMana;
+    public int maxMana;
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -31,7 +36,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        maxMana = startingMana;
     }
 
     // Update is called once per frame
@@ -40,6 +45,16 @@ public class GameManager : MonoBehaviour
         
     }
 
+    public bool UseToken(int amount)
+    {
+        if (tokens - amount < 0)
+            return false;
+        else
+        {
+            tokens -= amount;
+            return true;
+        }
+    }
     public void lowerEnemyHealth(int amount)
     {
         enemyHealth -= amount;

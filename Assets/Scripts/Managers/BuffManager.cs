@@ -5,6 +5,7 @@ using UnityEngine;
 public class BuffManager : MonoBehaviour
 {
     public static BuffManager instance;
+    public float helpfulBuffTimer;
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -42,6 +43,14 @@ public class BuffManager : MonoBehaviour
                 HealthComp comp = obj.GetComponent<HealthComp>();
                 comp.heal((int)(comp.maxHealth * 0.25f));
             }
+        }
+    }
+
+    public void IncreaseDamage(bool targetPlayer)
+    {
+        if (targetPlayer)
+        {
+            
         }
     }
 }

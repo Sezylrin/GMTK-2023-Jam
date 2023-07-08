@@ -31,10 +31,15 @@ public class EnemyAI : MonoBehaviour
 
     public float attackDelay;
     public float attackDuration;
+    public int damage;
+    private int currentDamage;
+    public GameObject weapon;
+    private PolygonCollider2D weaponCollider;
 
     [Header("Child OBJ")]
 
     public Rigidbody2D rb;
+    public Animator anim;
 
     [Header("Debug")]
     [SerializeField]
@@ -89,8 +94,10 @@ public class EnemyAI : MonoBehaviour
             return;
         if (timers.time[(int)EnemyTimers.attackDelay].Equals(0))
         {
+            rb.bodyType = RigidbodyType2D.Static;
             currentState = EnemyState.attacking;
             //attack by playing animation etc.
+            anim.Play("SwingSword");
             timers.time[(int)EnemyTimers.attackDuration] = attackDuration;
             timers.time[(int)EnemyTimers.attackDelay] = attackDelay;
         }
@@ -103,6 +110,9 @@ public class EnemyAI : MonoBehaviour
     private void StopAttacking()
     {
         if (currentState == EnemyState.attacking && timers.time[(int)EnemyTimers.attackDuration].Equals(0))
+        {
             currentState = EnemyState.chasing;
+            rb.bodyType = RigidbodyType2D.Dynamic;
+        }
     }
 }

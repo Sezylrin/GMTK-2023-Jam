@@ -42,6 +42,7 @@ public class HealthComp : MonoBehaviour
         {
             EnemyManager.instance.spawnedEnemies.Remove(gameObject);
             EnemyManager.instance.ReduceEnemy();
+            Instantiate(EnemyManager.instance.tokenObj, transform.position, Quaternion.identity);
         }
         Destroy(gameObject);
     }
