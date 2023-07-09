@@ -43,9 +43,14 @@ public class PlayerCardController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Y))
         {
             FindObjectOfType<EnemyDeckController>().PlayRandomCard();
-        }if (Input.GetKeyDown(KeyCode.U))
+        }
+        if (Input.GetKeyDown(KeyCode.U))
         {
             FindObjectOfType<EnemyDeckController>().ResetCards();
+        }
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            hand.DrawFullHand();
         }
     }
 }

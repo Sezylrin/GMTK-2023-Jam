@@ -139,4 +139,24 @@ public class HandController : MonoBehaviour
         }
         return false;
     }
+
+    public void DrawFullHand()
+    {
+        DrawCardRecursive(0);
+    }
+
+    private void DrawCardRecursive(int currentHandSize)
+    {
+        if (currentHandSize >= handSlots.Count)
+            return;
+
+        if (handSlotsAvailable[currentHandSize])
+        {
+            deck.Draw(() => DrawCardRecursive(currentHandSize + 1));
+        }
+        else
+        {
+            DrawCardRecursive(currentHandSize + 1);
+        }
+    }
 }

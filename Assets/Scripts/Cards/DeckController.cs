@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 public class DeckController : MonoBehaviour
 {
@@ -32,11 +33,11 @@ public class DeckController : MonoBehaviour
         ShuffleDeck();
     }
 
-    public void Draw()
+    public void Draw(Action callback = null)
     {
         if (cardsInDeck.Count == 0 || shuffling || !hand.HasAvailableSlot()) return;
 
-        GameObject randomCard = cardsInDeck[Random.Range(0, cardsInDeck.Count)];
+        GameObject randomCard = cardsInDeck[UnityEngine.Random.Range(0, cardsInDeck.Count)];
         randomCard.SetActive(true);
         randomCard.transform.SetAsLastSibling();
         randomCard.transform.localEulerAngles = new Vector3(0, 180, 0);
@@ -44,13 +45,13 @@ public class DeckController : MonoBehaviour
         Sequence seq = DOTween.Sequence();
         seq.Append(randomCard.transform.DORotate(Vector3.zero, 0.5f).SetEase(Ease.InOutQuad))
             .Insert(0.25f, DOTween.Sequence().OnComplete(() => {
-            randomCard.GetComponent<CardController>().FlipCardUp();
+                randomCard.GetComponent<CardController>().FlipCardUp();
             }))
             .OnComplete(() => {
                 hand.AddCardToHandSlot(randomCard);
+                cardsInDeck.Remove(randomCard);
+                callback?.Invoke();
             });
-
-        cardsInDeck.Remove(randomCard);
     }
 
     public void ReturnCardToDrawPile(GameObject cardToReturn)
@@ -85,7 +86,7 @@ public class DeckController : MonoBehaviour
     {
         for (int i = 0; i < shuffleCount; i++)
         {
-            int randomIndex = Random.Range(0, transform.childCount);
+            int randomIndex = UnityEngine.Random.Range(0, transform.childCount);
             Transform randomChild = transform.GetChild(randomIndex);
             Vector3 originalPosition = randomChild.position;
 
