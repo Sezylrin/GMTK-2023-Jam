@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class EnemyManager : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class EnemyManager : MonoBehaviour
     public GameObject tokenObj;
     public float separationDist;
     private int enemiesSpawned;
+    public GameObject HeartObj;
+
 
     public int spawnAmount;
     private void Awake()
@@ -58,14 +61,20 @@ public class EnemyManager : MonoBehaviour
         enemiesSpawned--;
         if (enemiesSpawned == 0)
         {
-            Invoke("EndRound", 1);
+            SpawnHeart();
         }
     }
 
-    public void EndRound()
+    public void SpawnHeart()
+    {
+        GameObject heart = Instantiate(HeartObj, Vector2.up * 2.5f, Quaternion.identity);
+        heart.GetComponentInChildren<TMP_Text>().text = GameManager.instance.enemyHealth.ToString();
+    }
+    public void SpawnShop()
     {
         GameManager.instance.currentState = gameState.shop;
-        GameUI.instance.Reset();
+        GameUI.instance.ResetUI();
+        GameManager.instance.playerInfo.ResetStats();
     }
     
 }

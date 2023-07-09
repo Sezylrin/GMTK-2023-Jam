@@ -32,9 +32,9 @@ public class EnemyAI : MonoBehaviour
     public float attackDelay;
     public float attackDuration;
     public int damage;
-    private int currentDamage;
     public GameObject weapon;
     private PolygonCollider2D weaponCollider;
+    public GameObject weaponCentrePoint;
 
     [Header("Child OBJ")]
 
@@ -53,11 +53,15 @@ public class EnemyAI : MonoBehaviour
         currentMaxSpeed = maxSpeed;
         timers = new Timers((int)EnemyTimers.numberOfCD);
         target = GameObject.FindWithTag(Tags.T_Player).transform;
+
+
+        SetWeapon(weapon);
     }
     void Update()
     {
         Attack();
         StopAttacking();
+        AimAttack();
         timers.TickTimer(Time.deltaTime);
     }
 
@@ -97,6 +101,7 @@ public class EnemyAI : MonoBehaviour
             rb.bodyType = RigidbodyType2D.Static;
             currentState = EnemyState.attacking;
             //attack by playing animation etc.
+            
             anim.Play("SwingSword");
             timers.time[(int)EnemyTimers.attackDuration] = attackDuration;
             timers.time[(int)EnemyTimers.attackDelay] = attackDelay;
@@ -107,12 +112,41 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    private void AimAttack()
+    {
+        if (currentState != EnemyState.chasing)
+            return;
+        Vector2 dir = target.position - transform.position;
+        var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90;
+        weaponCentrePoint.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        weaponCollider.enabled = true;
+    }
     private void StopAttacking()
     {
         if (currentState == EnemyState.attacking && timers.time[(int)EnemyTimers.attackDuration].Equals(0))
         {
+            weaponCollider.enabled = false;
+            weaponCentrePoint.transform.rotation = Quaternion.Euler(Vector3.zero);
             currentState = EnemyState.chasing;
             rb.bodyType = RigidbodyType2D.Dynamic;
         }
+    }
+
+    public void SetWeapon(GameObject Weapon)
+    {
+        weapon = Weapon;
+        weaponCollider = weapon.GetComponent<PolygonCollider2D>();
+    }
+
+    public void IncreaseSpeed()
+    {
+        attackDelay *= 0.6666666f;
+        attackDuration *= 0.6666666f;
+        anim.speed = 1.5f;
+    }
+
+    public void IncreaseMoveSpeed(float increaseSpeed)
+    {
+        currentMaxSpeed += increaseSpeed;
     }
 }

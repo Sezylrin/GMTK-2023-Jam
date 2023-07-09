@@ -136,11 +136,14 @@ MonoBehaviour:
   acceleration: 5
   maxSpeed: 5
   attackDelay: 1
-  attackSpeed: 0.4
+  attackSpeed: 0.666
   damage: 3
+  baseDamage: 0
+  currentDamage: 0
   weapon: {fileID: 8717332056161922383}
   rb: {fileID: 1770379286136157232}
   centre: {fileID: 4034959499065482557}
+  anim: {fileID: 2278002234007344184}
   direction: {x: 0, y: 0}
   LastDirection: {x: 0, y: 0}
   timers:
@@ -242,8 +245,9 @@ GameObject:
   - component: {fileID: 1373530617572709995}
   - component: {fileID: 629049456853122896}
   - component: {fileID: 546408389045039030}
+  - component: {fileID: 2278002234007344184}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -258,7 +262,7 @@ Transform:
   m_GameObject: {fileID: 8717332056161922383}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.77, z: 0}
-  m_LocalScale: {x: 0.4, y: 1.72, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4034959499065482557}
@@ -304,8 +308,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1187854383
   m_SortingLayer: 2
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 21300000, guid: 1f7c58793ab590b4cacea794645d30d0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -352,7 +356,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 2.38, y: 5.56}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -360,8 +364,31 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.5, y: 0.5}
-      - {x: -0.5, y: -0.5}
-      - {x: 0.5, y: -0.5}
+    - - {x: 0.18294826, y: 2.236711}
+      - {x: -0.7935205, y: 2.793135}
+      - {x: -0.5, y: 0.5}
+      - {x: -0.6175968, y: -2.7637353}
+      - {x: 0.7645922, y: -2.6461394}
       - {x: 0.5, y: 0.5}
   m_UseDelaunayMesh: 0
+--- !u!95 &2278002234007344184
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8717332056161922383}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b45110bde806f0a4d9b737139988137f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

@@ -7,6 +7,7 @@ public class GameUI : MonoBehaviour
 {
     public static GameUI instance;
     public GameObject startBattleBtn;
+    public GameObject ShopObj;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -35,11 +36,14 @@ public class GameUI : MonoBehaviour
     {
         EnemyManager.instance.SpawnEnemy(Random.Range(1, 6));
         GameManager.instance.currentState = gameState.fighting;
+        GameManager.instance.SetMana();
         startBattleBtn.SetActive(false);
+        ShopObj.SetActive(false);
     }
 
-    public void Reset()
+    public void ResetUI()
     {
         startBattleBtn.SetActive(true);
+        ShopObj.SetActive(true);
     }
 }

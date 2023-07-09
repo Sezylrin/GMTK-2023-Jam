@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Animations;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -21,12 +22,14 @@ public class PlayerController : MonoBehaviour
     [Header("Attack stats")]
 
     public float attackDelay;
+    private float originalAttackDelay;
     public float attackSpeed;
+    private float originalAttackSpeed;
     public int damage;
     public int baseDamage;
-    private int currentDamage;
+    public int currentDamage;
     public GameObject weapon;
-    private PolygonCollider2D weaponCollider;
+    public PolygonCollider2D weaponCollider;
 
     [Header("Child OBJ")]
 
@@ -48,6 +51,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private Timers timers;
     private List<GameObject> enemiesHit = new List<GameObject>();
+    private bool hitHeart = false;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -167,6 +171,8 @@ public class PlayerController : MonoBehaviour
     {
         this.weapon = weapon;
         weaponCollider = this.weapon.GetComponent<PolygonCollider2D>();
+        anim = GetComponentInChildren<Animator>();
+        anim.enabled = true;
     }
 
 
@@ -180,10 +186,93 @@ public class PlayerController : MonoBehaviour
                 collision.GetComponent<HealthComp>().TakeDamage(currentDamage);
             }
         }
+        if (collision.gameObject.CompareTag(Tags.T_Heart) && !hitHeart)
+        {
+            hitHeart = true;
+            GameManager.instance.lowerEnemyHealth(currentDamage);
+            collision.GetComponentInChildren<TMP_Text>().text = GameManager.instance.enemyHealth.ToString();
+            Invoke("RemoveHeart", 2);
+        }
     }
-
+    public void RemoveHeart()
+    {
+        hitHeart = false;
+        Destroy(GameObject.FindWithTag(Tags.T_Heart));
+        EnemyManager.instance.SpawnShop();
+    }
     public void ResetDamage()
     {
         currentDamage = damage + baseDamage;
+    }
+
+    public void AddDamage(int amount)
+    {
+        currentDamage += amount;
+    }
+
+    public void ResetStats()
+    {
+        if (BuffManager.instance.isSwitched)
+        {
+            BuffManager.instance.isSwitched = false;
+            GameManager.instance.playerHealth.currentHealth = currentDamage;
+        }
+        ResetDamage();
+        ResetSpeed();
+        ResetMoveSpeed();
+    }
+
+    [ContextMenu("increase Attack Speed")]
+    public void IncreaseAttackSpeed()
+    {
+        originalAttackDelay = attackDelay;
+        originalAttackSpeed = attackSpeed;
+        anim.speed = (1.5f);
+        attackDelay *= 0.66666666666f;
+        attackSpeed *= 0.66666666666f;
+    }
+
+    public void ResetSpeed()
+    {
+        if (originalAttackDelay == 0)
+            return;
+        attackDelay = originalAttackDelay;
+        attackSpeed = originalAttackSpeed;
+        anim.speed = 1;
+        originalAttackDelay = 0;
+        originalAttackSpeed = 0;
+    }
+
+    public void IncreaseSpeed(float speed)
+    {
+        currentMaxSpeed += speed;
+    }
+
+    public void ResetMoveSpeed()
+    {
+        currentMaxSpeed = maxSpeed;
+    }
+
+    public void ChangeWeapon(Weapons weaponSO)
+    {
+        DestroyImmediate(weapon);
+        GameObject newWep = Instantiate(weaponSO.weaponObj, centre.transform);
+        newWep.transform.localPosition = Vector3.up * weaponSO.Ydist;
+        SetWeapon(newWep);
+        currentDamage = currentDamage - damage + weaponSO.damage;
+        damage = weaponSO.damage;
+        bool increaseSpeed = originalAttackDelay != 0;
+        if (increaseSpeed)
+        {
+            ResetSpeed();
+            attackDelay = weaponSO.attackDelay;
+            attackSpeed = weaponSO.attackSpeed;
+            IncreaseAttackSpeed();
+        }
+        else
+        {
+            attackDelay = weaponSO.attackDelay;
+            attackSpeed = weaponSO.attackSpeed;
+        }
     }
 }

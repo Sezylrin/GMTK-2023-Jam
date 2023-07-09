@@ -6,17 +6,21 @@ public enum gameState
     starting,
     drawing,
     shop,
-    fighting
+    fighting,
+    enemyHealth
 }
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public GameObject player;
+    public HealthComp playerHealth;
+    public PlayerController playerInfo;
     public int enemyHealth;
     public gameState currentState;
     public int tokens;
     public int startingMana;
     public int maxMana;
+    public int currentMana;
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -31,6 +35,14 @@ public class GameManager : MonoBehaviour
         if (!player)
         {
             player = GameObject.FindWithTag(Tags.T_Player);
+        }
+        if (!playerHealth)
+        {
+            playerHealth = player.GetComponent<HealthComp>();
+        }
+        if (!playerInfo)
+        {
+            playerInfo = player.GetComponent<PlayerController>();
         }
     }
     // Start is called before the first frame update
@@ -63,5 +75,10 @@ public class GameManager : MonoBehaviour
         {
             //win
         }
+    }
+
+    public void SetMana()
+    {
+        currentMana = maxMana;
     }
 }
