@@ -99,5 +99,6 @@ public class DeckController : MonoBehaviour
 
         }
         shuffling = false;
+        hand.DrawFullHand();
     }
 }

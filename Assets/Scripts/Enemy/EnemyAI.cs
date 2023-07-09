@@ -184,4 +184,9 @@ public class EnemyAI : MonoBehaviour
     {
         currentMaxSpeed += increaseSpeed;
     }
+
+    public void SetChase()
+    {
+        currentState = EnemyState.chasing;
+    }
 }

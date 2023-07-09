@@ -39,6 +39,7 @@ public class GameUI : MonoBehaviour
         GameManager.instance.SetMana();
         startBattleBtn.SetActive(false);
         ShopObj.SetActive(false);
+        BuffManager.instance.StartDraw();
     }
 
     public void ResetUI()

@@ -57,6 +57,7 @@ public class EnemyDeckController : MonoBehaviour
                 randomCard.transform.localPosition = deckPosition;
                 canvasGroup.alpha = 1f;
                 canPlayCard = true;
+                BuffManager.instance.CastCard(randomCard.GetComponent<CardController>().card, false);
             })
         );
 

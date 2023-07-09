@@ -51,7 +51,8 @@ public class EnemyManager : MonoBehaviour
         for (int i = 0; i < amount; i++)
         {
             GameObject enemy = Instantiate(enemyTypes[Random.Range(0, enemyTypes.Count)], spawnCentre.position, Quaternion.identity);
-            enemy.GetComponent<EnemyAI>().ChangeWeapon(Weapons[Random.Range(0, Weapons.Count)]);
+            EnemyAI ai = enemy.GetComponent<EnemyAI>();
+            ai.ChangeWeapon(Weapons[Random.Range(0, Weapons.Count)]);
 
             Vector3 targetPos = spawnCentre.position;
             targetPos.x = spawnCentre.position.x - (((float)amount - 1) * 0.5f * separationDist) + (i * separationDist);
@@ -60,7 +61,9 @@ public class EnemyManager : MonoBehaviour
             spawnPos.y = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, 0)).y + 1;
             enemy.transform.position = spawnPos;
 
-            enemy.transform.DOMove(targetPos, 1.0f).SetEase(DG.Tweening.Ease.InOutQuad);
+            enemy.transform.DOMove(targetPos, 1.0f).SetEase(DG.Tweening.Ease.InOutQuad).OnComplete(()=> {
+                ai.SetChase();
+            });
 
             spawnedEnemies.Add(enemy);
         }
@@ -79,12 +82,22 @@ public class EnemyManager : MonoBehaviour
     {
         GameObject heart = Instantiate(HeartObj, Vector2.up * 2.5f, Quaternion.identity);
         heart.GetComponentInChildren<TMP_Text>().text = GameManager.instance.enemyHealth.ToString();
+
+        Vector3 targetPos = Vector2.up * 2.5f;
+
+        Vector3 spawnPos = targetPos;
+        spawnPos.y = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, 0)).y + 1; 
+        heart.transform.position = spawnPos;
+
+        heart.transform.DOMove(targetPos, 1.0f).SetEase(DG.Tweening.Ease.InOutQuad);
     }
     public void SpawnShop()
     {
         GameManager.instance.currentState = gameState.shop;
         GameUI.instance.ResetUI();
         GameManager.instance.playerInfo.ResetStats();
+        BuffManager.instance.StopDraw();
+        BuffManager.instance.deck.RemoveAllPlayedCards();
     }
     
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Animations;
 using TMPro;
+using DG.Tweening;
 
 public class PlayerController : MonoBehaviour
 {
@@ -198,7 +199,13 @@ public class PlayerController : MonoBehaviour
     public void RemoveHeart()
     {
         hitHeart = false;
-        Destroy(GameObject.FindWithTag(Tags.T_Heart));
+        GameObject heart = GameObject.FindWithTag(Tags.T_Heart);
+        Vector3 currentPos = Vector2.up * 2.5f;
+
+        Vector3 targetPos = currentPos;
+        targetPos.y = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, 0)).y + 1;
+        heart.transform.DOMove(targetPos, 1.0f).SetEase(DG.Tweening.Ease.InOutQuad);
+        //Destroy();
         EnemyManager.instance.SpawnShop();
     }
     public void ResetDamage()

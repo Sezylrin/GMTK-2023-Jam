@@ -10038,7 +10038,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1442276424948917349, guid: 4bfd7ed5435d0664a8e405cf43624db2, type: 3}
       propertyPath: m_Name
-      value: Attack Up
+      value: Power Greed
       objectReference: {fileID: 0}
     - target: {fileID: 2357994012173931363, guid: 4bfd7ed5435d0664a8e405cf43624db2, type: 3}
       propertyPath: m_Pivot.x

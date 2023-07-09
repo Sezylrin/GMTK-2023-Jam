@@ -8,6 +8,8 @@ public class BuffManager : MonoBehaviour
     public float helpfulBuffTimer;
     public bool isSwitched = false;
     public List<Weapons> weapons = new List<Weapons>();
+    public DeckController deck;
+    public HandController hand;
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -24,7 +26,24 @@ public class BuffManager : MonoBehaviour
     {
         
     }
+    public void StartDraw()
+    {
+        Invoke("attemptDraw", 0.5f);
+    }
 
+    public void StopDraw()
+    {
+        CancelInvoke("attempDraw");
+    }
+    public void attemptDraw()
+    {
+        if (GameManager.instance.currentState == gameState.fighting)
+        {
+            hand.PlayRandomCard();
+            Invoke("attemptDraw", Random.Range(0.5f, 1f));
+        }
+
+    }
     // Update is called once per frame
     void Update()
     {

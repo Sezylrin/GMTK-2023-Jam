@@ -50,7 +50,7 @@ public class PlayerCardController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.A))
         {
-            hand.DrawFullHand();
+            //hand.DrawFullHand();
         }
     }
 }
