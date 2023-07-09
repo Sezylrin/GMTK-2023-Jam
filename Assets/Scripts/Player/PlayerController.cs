@@ -142,7 +142,7 @@ public class PlayerController : MonoBehaviour
         timers.time[(int)CDTimers.attackCD] = attackDelay;
         timers.time[(int)CDTimers.attackDuration] = attackSpeed;
         Vector2 dir = (mousePos - (Vector2)transform.position).normalized;
-        anim.Play("SwingSword");
+        anim.Play("SwingWeapon");
         //centre.position += (Vector3)dir;
         // play animation and state control in inherited classes
 

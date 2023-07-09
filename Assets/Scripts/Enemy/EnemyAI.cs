@@ -144,7 +144,13 @@ public class EnemyAI : MonoBehaviour
         attackDuration *= 0.6666666f;
         anim.speed = 1.5f;
     }
-
+    public void ChangeWeapon(Weapons weaponSO)
+    {
+        DestroyImmediate(weapon);
+        GameObject newWep = Instantiate(weaponSO.weaponObj, weaponCentrePoint.transform);
+        newWep.transform.localPosition = Vector3.up * weaponSO.Ydist;
+        SetWeapon(newWep);
+    }
     public void IncreaseMoveSpeed(float increaseSpeed)
     {
         currentMaxSpeed += increaseSpeed;
