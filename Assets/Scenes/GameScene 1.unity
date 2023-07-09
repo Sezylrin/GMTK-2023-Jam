@@ -589,10 +589,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: CardCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 1209646073561789228, guid: f3cc2f1eade99bc4082e7c337029d2da, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8089939597395057288, guid: f3cc2f1eade99bc4082e7c337029d2da, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -635,6 +631,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8089939597395057288, guid: f3cc2f1eade99bc4082e7c337029d2da, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8428537441232060759, guid: f3cc2f1eade99bc4082e7c337029d2da, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1752,7 +1752,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 3543f6486379d0c4487c5b31cf7daab6, type: 3}
     - target: {fileID: 3381547188884478402, guid: 6311f40eda4cd5747b041ff63f50a381, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6687386728671340372, guid: 6311f40eda4cd5747b041ff63f50a381, type: 3}
       propertyPath: m_Name

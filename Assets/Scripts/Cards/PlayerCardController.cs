@@ -32,13 +32,20 @@ public class PlayerCardController : MonoBehaviour
         {
             deck.Draw();
         }
-        if (Input.GetKeyDown(KeyCode.Y))
+        if (Input.GetKeyDown(KeyCode.R))
         {
             hand.PlayRandomCard();
         }
-        if (Input.GetKeyDown(KeyCode.U))
+        if (Input.GetKeyDown(KeyCode.T))
         {
             deck.RemoveAllPlayedCards();
+        }
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            FindObjectOfType<EnemyDeckController>().PlayRandomCard();
+        }if (Input.GetKeyDown(KeyCode.U))
+        {
+            FindObjectOfType<EnemyDeckController>().ResetCards();
         }
     }
 }
