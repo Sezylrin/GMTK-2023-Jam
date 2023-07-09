@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D rb;
     public Transform centre;
     public Animator anim;
+    public TMP_Text attackText;
 
     [Header("Debug Values")]
 
@@ -203,11 +204,13 @@ public class PlayerController : MonoBehaviour
     public void ResetDamage()
     {
         currentDamage = damage + baseDamage;
+        attackText.text = currentDamage.ToString();
     }
 
     public void AddDamage(int amount)
     {
         currentDamage += amount;
+        attackText.text = currentDamage.ToString();
     }
 
     public void ResetStats()

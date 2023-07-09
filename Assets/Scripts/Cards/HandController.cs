@@ -67,7 +67,14 @@ public class HandController : MonoBehaviour
             canPlayCard = false;
             int randomCardSelected = availableCards[UnityEngine.Random.Range(0, availableCards.Count)];
             GameObject selectedCard = handSlots[randomCardSelected].transform.GetChild(0).gameObject;
+            if (GameManager.instance.currentMana < selectedCard.GetComponent<CardController>().card.manaCost)
+            {
+                canPlayCard = true;
+                return;
+            }
+            GameManager.instance.UseMana(selectedCard.GetComponent<CardController>().card.manaCost);
 
+            BuffManager.instance.CastCard(selectedCard.GetComponent<CardController>().card, true);
             Vector3 startCardPosition = selectedCard.transform.position;
             Vector3 endCardPosition = playedCardSlot.transform.position;
 

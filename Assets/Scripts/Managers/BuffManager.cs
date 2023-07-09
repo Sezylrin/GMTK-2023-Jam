@@ -57,6 +57,7 @@ public class BuffManager : MonoBehaviour
                 SwitchWeaponSpear();
                 break;
             case ((int)CardInfo.Dagger):
+                SwitchWeaponDagger();
                 break;
             case ((int)CardInfo.Fireball):
                 break;
@@ -152,5 +153,11 @@ public class BuffManager : MonoBehaviour
     public void SwitchWeaponSpear()
     {
         GameManager.instance.playerInfo.ChangeWeapon(weapons[1]);
+    }
+
+    [ContextMenu("SwitchWeaponDagger")]
+    public void SwitchWeaponDagger()
+    {
+        GameManager.instance.playerInfo.ChangeWeapon(weapons[2]);
     }
 }

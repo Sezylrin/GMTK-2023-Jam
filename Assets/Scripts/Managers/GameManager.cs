@@ -81,4 +81,9 @@ public class GameManager : MonoBehaviour
     {
         currentMana = maxMana;
     }
+
+    public void UseMana(int amount)
+    {
+        currentMana -= amount;
+    }
 }
