@@ -8,8 +8,9 @@ public class SceneLoader : MonoBehaviour
     enum Scenes
     {
         MainMenu = 0,
-        Game = 1
-        //Add other scenes here
+        Game = 1,
+        Defeat = 2,
+        Victory = 3,
     }
     
     public static SceneLoader instance;

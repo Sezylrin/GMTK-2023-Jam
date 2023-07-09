@@ -23,4 +23,18 @@ public class PlayerCardController : MonoBehaviour
 
         deck.InitialiseDeck(cardsToAdd);
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            //Defeat
+            FindObjectOfType<SceneLoader>().LoadSceneIndex(2);
+        }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            //Victory
+            FindObjectOfType<SceneLoader>().LoadSceneIndex(2);
+        }
+    }
 }
