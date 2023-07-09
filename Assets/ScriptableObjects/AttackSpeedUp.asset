@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AttackSpeedUp
   m_EditorClassIdentifier: 
   name: Attack Speed
-  description: Increase attack speed by []
+  description: Increase attack speed of all cards
   manaCost: 1
   attack: 0
   health: 0

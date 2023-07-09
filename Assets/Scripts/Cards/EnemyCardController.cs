@@ -18,7 +18,7 @@ public class EnemyCardController : MonoBehaviour
         foreach (Card card in cardsInDeck)
         {
             GameObject newCard = Instantiate(cardPrefab);
-            newCard.GetComponent<CardController>().InstantiateCard(card);
+            newCard.GetComponent<CardController>().InstantiateCard(card, true);
             newCard.GetComponent<CardController>().FlipCardUp();
             cardsToAdd.Add(newCard);
         }
