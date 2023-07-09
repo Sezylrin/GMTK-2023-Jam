@@ -128,6 +128,7 @@ public class EnemyAI : MonoBehaviour
     }
     private void DelayAttack()
     {
+        weaponCollider.enabled = true;
         anim.Play("SwingWeapon");
     }
     private void AimAttack()
@@ -139,7 +140,7 @@ public class EnemyAI : MonoBehaviour
         Vector2 dir = target.position - transform.position;
         var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90;
         weaponCentrePoint.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        weaponCollider.enabled = true;
+        
     }
     private void StopAttacking()
     {

@@ -9990,6 +9990,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2083712124611540456, guid: 7229d610c7897654da08cff43d81bbd4, type: 3}
+      propertyPath: m_ChildAlignment
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083712124611540456, guid: 7229d610c7897654da08cff43d81bbd4, type: 3}
+      propertyPath: m_Padding.m_Left
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4079587107562182309, guid: 7229d610c7897654da08cff43d81bbd4, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
