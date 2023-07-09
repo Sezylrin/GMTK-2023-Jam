@@ -41,10 +41,9 @@ public class DeckController : MonoBehaviour
         randomCard.transform.SetAsLastSibling();
         randomCard.transform.localEulerAngles = new Vector3(0, 180, 0);
 
-        // Create a sequence to chain animations
         Sequence seq = DOTween.Sequence();
         seq.Append(randomCard.transform.DORotate(Vector3.zero, 0.5f).SetEase(Ease.InOutQuad))
-            .Insert(0.25f, DOTween.Sequence().OnComplete(() => { // Inserting FlipCardUp halfway through the rotation
+            .Insert(0.25f, DOTween.Sequence().OnComplete(() => {
             randomCard.GetComponent<CardController>().FlipCardUp();
             }))
             .OnComplete(() => {

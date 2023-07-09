@@ -15,6 +15,10 @@ public enum CardInfo
     Fireball,
     Iceball,
     MeteorShower,
+
+    Dragon,
+    BlackWidow,
+    Cyclops,
 }
 
 public enum CardType
