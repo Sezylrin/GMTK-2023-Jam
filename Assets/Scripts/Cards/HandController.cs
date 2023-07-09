@@ -84,13 +84,8 @@ public class HandController : MonoBehaviour
             Sequence sequence = DOTween.Sequence();
 
             selectedCard.GetComponent<CardController>().RemoveFromHand();
-            sequence.Append(DOTween.To(() => startCardPosition, x => selectedCard.transform.position = x, endCardPosition, tweenDuration).SetEase(Ease.InOutQuad))
-                .OnComplete(() =>
-                {
-                    selectedCard.transform.SetParent(playedCardSlot.transform, false);
-                    selectedCard.transform.localPosition = Vector3.zero;
-                    handSlotsAvailable[randomCardSelected] = true;
-                });
+            sequence.Append(DOTween.To(() => startCardPosition, x => selectedCard.transform.position = x, endCardPosition, tweenDuration).SetEase(Ease.InOutQuad));
+            handSlotsAvailable[randomCardSelected] = true;
 
             sequence.AppendInterval(3.0f);
             sequence.Append(selectedCard.GetComponent<CanvasGroup>().DOFade(0, 1.0f));
@@ -99,7 +94,12 @@ public class HandController : MonoBehaviour
                 selectedCard.transform.SetParent(buffZone.transform);
                 selectedCard.transform.localPosition = Vector3.zero;
             });
-            sequence.Append(selectedCard.GetComponent<CanvasGroup>().DOFade(1, 1.0f));
+            sequence.Append(selectedCard.GetComponent<CanvasGroup>().DOFade(1, 1.0f))
+                .OnComplete(() =>
+                {
+                    sequence.Kill();
+                    canPlayCard = true;
+                });
         }
     }
 }
