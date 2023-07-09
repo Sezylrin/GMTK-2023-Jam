@@ -12,6 +12,8 @@ public class CardController : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     [SerializeField] private TMP_Text attack;
     [SerializeField] private GameObject attackIcon;
     [SerializeField] private GameObject healthIcon;
+    [SerializeField] private Sprite cardBackImg;
+    [SerializeField] private GameObject cardInfo;
 
     private Vector2 originalSize;
     private Vector2 hoverSize;
@@ -30,6 +32,7 @@ public class CardController : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         originalSize = rectTransform.sizeDelta;
         originalPosition = rectTransform.localPosition;
         hoverSize = originalSize * scaleAmount;
+        gameObject.GetComponent<Image>().sprite = cardBackImg;
 
         originalCardNameFontSize = cardName.fontSize;
         originalDescriptionFontSize = description.fontSize;
@@ -41,7 +44,6 @@ public class CardController : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public void InstantiateCard(Card card)
     {
         this.card = card;
-        gameObject.GetComponent<Image>().sprite = card.sprite;
         cardName.text = card.name;
         description.text = card.description;
         manaCost.text = card.manaCost.ToString();
@@ -117,5 +119,17 @@ public class CardController : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public void UpdateOriginalPosition()
     {
         originalPosition = rectTransform.localPosition;
+    }
+
+    public void FlipCardUp()
+    {
+        gameObject.GetComponent<Image>().sprite = card.sprite;
+        cardInfo.SetActive(true);
+    }
+
+    public void FlipCardDown()
+    {
+        gameObject.GetComponent<Image>().sprite = cardBackImg;
+        cardInfo.SetActive(false);
     }
 }

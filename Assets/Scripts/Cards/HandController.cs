@@ -119,5 +119,17 @@ public class HandController : MonoBehaviour
                 selectedCard.GetComponent<CanvasGroup>().alpha = 1;
                 canPlayCard = true;
             });
-    }   
+    }
+
+    public bool HasAvailableSlot()
+    {
+        foreach (bool slotAvailable in handSlotsAvailable)
+        {
+            if (slotAvailable)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }
