@@ -40,11 +40,17 @@ public class DeckController : MonoBehaviour
         randomCard.SetActive(true);
         randomCard.transform.SetAsLastSibling();
         randomCard.transform.localEulerAngles = new Vector3(0, 180, 0);
-        randomCard.transform.DORotate(Vector3.zero, 0.5f).SetEase(Ease.InOutQuad)
+
+        // Create a sequence to chain animations
+        Sequence seq = DOTween.Sequence();
+        seq.Append(randomCard.transform.DORotate(Vector3.zero, 0.5f).SetEase(Ease.InOutQuad))
+            .Insert(0.25f, DOTween.Sequence().OnComplete(() => { // Inserting FlipCardUp halfway through the rotation
+            randomCard.GetComponent<CardController>().FlipCardUp();
+            }))
             .OnComplete(() => {
                 hand.AddCardToHandSlot(randomCard);
-                randomCard.GetComponent<CardController>().FlipCardUp();
             });
+
         cardsInDeck.Remove(randomCard);
     }
 
@@ -63,6 +69,7 @@ public class DeckController : MonoBehaviour
         {
             GameObject card = buffZone.transform.GetChild(i).gameObject;
             card.transform.SetParent(gameObject.transform, false);
+            card.GetComponent<CardController>().FlipCardDown();
             card.transform.localPosition = new Vector3(-80, 0, 0);
         }
         ShuffleDeck();
