@@ -9,6 +9,7 @@ public class EnemyManager : MonoBehaviour
     // Start is called before the first frame update
     public List<GameObject> enemyTypes = new List<GameObject>();
     public List<GameObject> spawnedEnemies;
+    public List<Weapons> Weapons;
     public Transform spawnCentre;
     public GameObject tokenObj;
     public float separationDist;
@@ -49,6 +50,7 @@ public class EnemyManager : MonoBehaviour
         for (int i = 0; i < amount; i++)
         {
             GameObject enemy = Instantiate(enemyTypes[Random.Range(0, enemyTypes.Count)], spawnCentre.position, Quaternion.identity);
+            enemy.GetComponent<EnemyAI>().ChangeWeapon(Weapons[Random.Range(0, Weapons.Count)]);
             Vector3 pos = enemy.transform.position;
             pos.x = spawnCentre.position.x - (((float)amount - 1) * 0.5f * separationDist) + (i * separationDist);
             enemy.transform.position = pos;

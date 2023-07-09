@@ -10,10 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 665c4cc4a8a4e2c43a8971656b1c2fbf, type: 3}
-  m_Name: Dagger
+  m_Name: SwordEnemy
   m_EditorClassIdentifier: 
-  weaponObj: {fileID: 2275926454667745998, guid: 9aa3807d5b6bc224b96f29ca6b133c66, type: 3}
-  attackDelay: 0.8
-  attackSpeed: 0.4333
+  weaponObj: {fileID: 8683978232960437698, guid: 4de0e967e81b5f947a78706ce4c74c18, type: 3}
+  attackDelay: 4
+  attackSpeed: 1.332
   damage: 2
-  Ydist: 0.5
+  Ydist: 1.2
+  attackDist: 3
+  attackPrepTime: 0.1

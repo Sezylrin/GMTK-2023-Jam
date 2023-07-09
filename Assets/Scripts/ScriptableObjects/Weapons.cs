@@ -9,4 +9,6 @@ public class Weapons : ScriptableObject
     public float attackSpeed;
     public int damage;
     public float Ydist;
+    public float attackDist;
+    public float attackPrepTime;
 }
