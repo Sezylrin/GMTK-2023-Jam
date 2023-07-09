@@ -33,7 +33,7 @@ public class DeckController : MonoBehaviour
         ShuffleDeck();
     }
 
-    public void Draw(Action callback = null)
+    public void Draw()
     {
         if (cardsInDeck.Count == 0 || shuffling || !hand.HasAvailableSlot()) return;
 
@@ -50,7 +50,6 @@ public class DeckController : MonoBehaviour
             .OnComplete(() => {
                 hand.AddCardToHandSlot(randomCard);
                 cardsInDeck.Remove(randomCard);
-                callback?.Invoke();
             });
     }
 
