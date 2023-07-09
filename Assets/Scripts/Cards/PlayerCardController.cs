@@ -41,5 +41,9 @@ public class PlayerCardController : MonoBehaviour
         {
             hand.PlayRandomCard();
         }
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            deck.RemoveAllPlayedCards();
+        }
     }
 }

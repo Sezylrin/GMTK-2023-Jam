@@ -52,6 +52,10 @@ public class CardController : MonoBehaviour, IPointerEnterHandler, IPointerExitH
                 healthIcon.SetActive(false);
                 attack.text = card.attack.ToString();
                 break;
+            case CardType.Character:
+                health.text = card.health.ToString();
+                attack.text = card.attack.ToString();
+                break;
             default:
                 healthIcon.SetActive(false);
                 attackIcon.SetActive(false);

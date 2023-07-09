@@ -22,6 +22,7 @@ public enum CardType
     Powerup,
     Weapon,
     Spell,
+    Character,
 }
 
 [CreateAssetMenu(fileName ="Card", menuName="Cards")]
