@@ -19,4 +19,4 @@ MonoBehaviour:
   health: 0
   type: 0
   info: 2
-  sprite: {fileID: 21300000, guid: 99c8439558e8195489fc90bd8c0bf442, type: 3}
+  sprite: {fileID: 21300000, guid: 57426d4755137d24cadf777014d45fb2, type: 3}
