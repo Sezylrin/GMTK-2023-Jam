@@ -340,6 +340,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CardCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 3447203461152202313, guid: f3cc2f1eade99bc4082e7c337029d2da, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -120
+      objectReference: {fileID: 0}
     - target: {fileID: 8089939597395057288, guid: f3cc2f1eade99bc4082e7c337029d2da, type: 3}
       propertyPath: m_RootOrder
       value: 1
