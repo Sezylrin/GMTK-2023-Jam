@@ -122,6 +122,7 @@ public class BuffManager : MonoBehaviour
         {
             HealthComp playerHealth = GameManager.instance.playerHealth;
             playerHealth.heal((int)(playerHealth.maxHealth * 0.5f));
+            GameManager.instance.playerInfo.particles[0].SetActive(true);
         }
         else
         {
@@ -138,6 +139,7 @@ public class BuffManager : MonoBehaviour
         if (targetPlayer)
         {
             GameManager.instance.playerInfo.AddDamage(2);
+            GameManager.instance.playerInfo.particles[1].SetActive(true);
         }
         else
         {
@@ -145,6 +147,7 @@ public class BuffManager : MonoBehaviour
             {
                 EnemyAI comp = obj.GetComponent<EnemyAI>();
                 comp.damage++;
+                comp.particles[0].SetActive(true);
             }
         }
     }
@@ -154,6 +157,7 @@ public class BuffManager : MonoBehaviour
         if (targetPlayer)
         {
             GameManager.instance.playerInfo.IncreaseAttackSpeed();
+            GameManager.instance.playerInfo.particles[1].SetActive(true);
         }
         else
         {
@@ -161,6 +165,7 @@ public class BuffManager : MonoBehaviour
             {
                 EnemyAI comp = obj.GetComponent<EnemyAI>();
                 comp.IncreaseSpeed();
+                comp.particles[1].SetActive(true);
             }
         }
     }
@@ -170,6 +175,7 @@ public class BuffManager : MonoBehaviour
         if (targetPlayer)
         {
             GameManager.instance.playerInfo.IncreaseSpeed(2.5f);
+            GameManager.instance.playerInfo.particles[1].SetActive(true);
         }
         else
         {
@@ -177,6 +183,7 @@ public class BuffManager : MonoBehaviour
             {
                 EnemyAI comp = obj.GetComponent<EnemyAI>();
                 comp.IncreaseMoveSpeed(2.5f);
+                comp.particles[1].SetActive(true);
             }
         }
     }
@@ -189,6 +196,7 @@ public class BuffManager : MonoBehaviour
         GameManager.instance.playerInfo.AttackDamageText();
         GameManager.instance.playerHealth.HealthDamageText();
         isSwitched = true;
+        GameManager.instance.playerInfo.particles[2].SetActive(true);
     }
     [ContextMenu("SwitchWeaponSword")]
     public void SwitchWeaponSword()

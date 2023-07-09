@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
     public Transform centre;
     public Animator anim;
     public TMP_Text attackText;
+    public List<GameObject> particles = new List<GameObject>();
 
     [Header("Debug Values")]
 
@@ -232,6 +233,7 @@ public class PlayerController : MonoBehaviour
         ResetDamage();
         ResetSpeed();
         ResetMoveSpeed();
+        ResetParticles();
     }
 
     [ContextMenu("increase Attack Speed")]
@@ -292,5 +294,13 @@ public class PlayerController : MonoBehaviour
     public void AttackDamageText()
     {
         attackText.text = currentDamage.ToString();
+    }
+
+    public void ResetParticles()
+    {
+        foreach(GameObject obj in particles)
+        {
+            obj.SetActive(false);
+        }
     }
 }
