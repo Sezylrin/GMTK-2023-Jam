@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponObj: {fileID: 2275926454667745998, guid: 459f307a73734914992a8305894a5c22, type: 3}
   attackDelay: 1
-  attackSpeed: 0.66666
+  attackSpeed: 0.666
   damage: 2
   Ydist: 0.77
+  attackDist: 0
+  attackPrepTime: 0

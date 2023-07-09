@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class EnemyAI : MonoBehaviour
 {
     public enum EnemyState : int
     {
+        idle,
         chasing,
         readyAttack,
         attacking
@@ -15,6 +17,7 @@ public class EnemyAI : MonoBehaviour
     {
         attackDelay,
         attackDuration,
+        prepAttack,
         numberOfCD
     }
     [Header("Core")]
@@ -35,11 +38,12 @@ public class EnemyAI : MonoBehaviour
     public GameObject weapon;
     private PolygonCollider2D weaponCollider;
     public GameObject weaponCentrePoint;
-
+    public float attackPrep;
     [Header("Child OBJ")]
 
     public Rigidbody2D rb;
     public Animator anim;
+    public TMP_Text attackText;
 
     [Header("Debug")]
     [SerializeField]
@@ -49,13 +53,14 @@ public class EnemyAI : MonoBehaviour
 
     void Start()
     {
-        currentState = EnemyState.chasing;
+        currentState = EnemyState.idle;
         currentMaxSpeed = maxSpeed;
         timers = new Timers((int)EnemyTimers.numberOfCD);
         target = GameObject.FindWithTag(Tags.T_Player).transform;
 
 
         SetWeapon(weapon);
+        SetDamageText();
     }
     void Update()
     {
@@ -71,6 +76,8 @@ public class EnemyAI : MonoBehaviour
     }
     private void Move()
     {
+        if (currentState == EnemyState.idle)
+            return;
         if (Vector2.Distance(transform.position,target.position) > attackDist && currentState.Equals(EnemyState.chasing))
         {
             if (rb.velocity.magnitude <= currentMaxSpeed)
@@ -88,12 +95,15 @@ public class EnemyAI : MonoBehaviour
         }
         else if (timers.time[(int)EnemyTimers.attackDelay].Equals(0))
         {
+            Debug.Log("attacking");
             currentState = EnemyState.readyAttack;
         }
     }
 
     private void Attack()
     {
+        if (currentState == EnemyState.idle)
+            return;
         if (!currentState.Equals(EnemyState.readyAttack))
             return;
         if (timers.time[(int)EnemyTimers.attackDelay].Equals(0))
@@ -101,19 +111,24 @@ public class EnemyAI : MonoBehaviour
             rb.bodyType = RigidbodyType2D.Static;
             currentState = EnemyState.attacking;
             //attack by playing animation etc.
-            
-            anim.Play("SwingSword");
-            timers.time[(int)EnemyTimers.attackDuration] = attackDuration;
-            timers.time[(int)EnemyTimers.attackDelay] = attackDelay;
+            Invoke("DelayAttack", attackPrep);
+            timers.time[(int)EnemyTimers.attackDelay] = attackDelay + attackPrep;
+
+            timers.time[(int)EnemyTimers.attackDuration] = attackDuration + attackPrep;
         }
         else
         {
             currentState = EnemyState.chasing;
         }
     }
-
+    private void DelayAttack()
+    {
+        anim.Play("SwingWeapon");
+    }
     private void AimAttack()
     {
+        if (currentState == EnemyState.idle)
+            return;
         if (currentState != EnemyState.chasing)
             return;
         Vector2 dir = target.position - transform.position;
@@ -123,6 +138,8 @@ public class EnemyAI : MonoBehaviour
     }
     private void StopAttacking()
     {
+        if (currentState == EnemyState.idle)
+            return;
         if (currentState == EnemyState.attacking && timers.time[(int)EnemyTimers.attackDuration].Equals(0))
         {
             weaponCollider.enabled = false;
@@ -132,10 +149,13 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    public void SetWeapon(GameObject Weapon)
+    public void SetWeapon(GameObject weapon)
     {
-        weapon = Weapon;
-        weaponCollider = weapon.GetComponent<PolygonCollider2D>();
+        this.weapon = weapon;
+        weaponCollider = this.weapon.GetComponent<PolygonCollider2D>();
+        anim = GetComponentInChildren<Animator>();
+        anim.enabled = true;
+        
     }
 
     public void IncreaseSpeed()
@@ -150,6 +170,15 @@ public class EnemyAI : MonoBehaviour
         GameObject newWep = Instantiate(weaponSO.weaponObj, weaponCentrePoint.transform);
         newWep.transform.localPosition = Vector3.up * weaponSO.Ydist;
         SetWeapon(newWep);
+        attackDelay = weaponSO.attackDelay;
+        attackDuration = weaponSO.attackSpeed;
+        attackDist = weaponSO.attackDist;
+        attackPrep = weaponSO.attackPrepTime;        
+    }
+
+    public void SetDamageText()
+    {
+        attackText.text = damage.ToString();
     }
     public void IncreaseMoveSpeed(float increaseSpeed)
     {

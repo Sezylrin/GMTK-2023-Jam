@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Spear
   m_EditorClassIdentifier: 
   weaponObj: {fileID: 2275926454667745998, guid: 122b19fe0382c5841939f88e76cbed33, type: 3}
-  attackDelay: 1.2
-  attackSpeed: 0.5
+  attackDelay: 1.4
+  attackSpeed: 1
   damage: 4
   Ydist: 0.7
