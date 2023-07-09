@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: IncreaseMovespeed
   m_EditorClassIdentifier: 
   name: Move Speed
-  description: Increase move speed by []
+  description: Increase move speed of all characters
   manaCost: 1
   attack: 0
   health: 0

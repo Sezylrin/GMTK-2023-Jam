@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Heal
   m_EditorClassIdentifier: 
   name: Revitalise
-  description: Heal the player [] hitpoints
+  description: Heal all characters
   manaCost: 1
   attack: 0
   health: 0

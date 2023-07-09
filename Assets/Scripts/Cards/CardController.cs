@@ -41,7 +41,7 @@ public class CardController : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         originalAttackFontSize = attack.fontSize;
     }
 
-    public void InstantiateCard(Card card)
+    public void InstantiateCard(Card card, bool enemyCard = false)
     {
         this.card = card;
         cardName.text = card.name;
@@ -62,6 +62,12 @@ public class CardController : MonoBehaviour, IPointerEnterHandler, IPointerExitH
                 healthIcon.SetActive(false);
                 attackIcon.SetActive(false);
                 break;
+        }
+
+        if (enemyCard)
+        {
+            healthIcon.SetActive(false);
+            attackIcon.SetActive(false);
         }
     }
 
