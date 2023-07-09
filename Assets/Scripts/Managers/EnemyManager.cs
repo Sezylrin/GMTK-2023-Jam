@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using DG.Tweening;
 
 public class EnemyManager : MonoBehaviour
 {
@@ -51,9 +52,16 @@ public class EnemyManager : MonoBehaviour
         {
             GameObject enemy = Instantiate(enemyTypes[Random.Range(0, enemyTypes.Count)], spawnCentre.position, Quaternion.identity);
             enemy.GetComponent<EnemyAI>().ChangeWeapon(Weapons[Random.Range(0, Weapons.Count)]);
-            Vector3 pos = enemy.transform.position;
-            pos.x = spawnCentre.position.x - (((float)amount - 1) * 0.5f * separationDist) + (i * separationDist);
-            enemy.transform.position = pos;
+
+            Vector3 targetPos = spawnCentre.position;
+            targetPos.x = spawnCentre.position.x - (((float)amount - 1) * 0.5f * separationDist) + (i * separationDist);
+
+            Vector3 spawnPos = targetPos;
+            spawnPos.y = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, 0)).y + 1;
+            enemy.transform.position = spawnPos;
+
+            enemy.transform.DOMove(targetPos, 1.0f).SetEase(DG.Tweening.Ease.InOutQuad);
+
             spawnedEnemies.Add(enemy);
         }
     }
