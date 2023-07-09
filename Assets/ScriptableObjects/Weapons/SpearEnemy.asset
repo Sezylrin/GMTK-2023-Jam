@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 665c4cc4a8a4e2c43a8971656b1c2fbf, type: 3}
+  m_Name: SpearEnemy
+  m_EditorClassIdentifier: 
+  weaponObj: {fileID: 2275926454667745998, guid: 02b105d1ddf0dab4485ba1b83a241539, type: 3}
+  attackDelay: 5
+  attackSpeed: 1.5
+  damage: 3
+  Ydist: 1
+  attackDist: 2.5
+  attackPrepTime: 0.1

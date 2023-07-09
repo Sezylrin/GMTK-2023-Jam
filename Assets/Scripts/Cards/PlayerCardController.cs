@@ -5,15 +5,12 @@ public class PlayerCardController : MonoBehaviour
 {
     [SerializeField] private List<Card> cardsInDeck;
     [SerializeField] private GameObject cardPrefab;
-    [SerializeField] private GameObject test;
 
     private DeckController deck;
-    private HandController hand;
 
     private void Start()
     {
         deck = FindObjectOfType<DeckController>();
-        hand = FindObjectOfType<HandController>();
 
         List<GameObject> cardsToAdd = new();
 
@@ -25,21 +22,5 @@ public class PlayerCardController : MonoBehaviour
         }
 
         deck.InitialiseDeck(cardsToAdd);
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            deck.Draw();
-        }
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            hand.DiscardHand();
-        }
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            hand.PlayRandomCard();
-        }
     }
 }

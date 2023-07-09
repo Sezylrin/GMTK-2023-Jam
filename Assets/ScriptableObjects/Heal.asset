@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Heal
   m_EditorClassIdentifier: 
   name: Revitalise
-  description: Heal the player [] hitpoints
+  description: Heal all characters
   manaCost: 1
   attack: 0
   health: 0
   type: 0
   info: 1
-  sprite: {fileID: 21300000, guid: 99c8439558e8195489fc90bd8c0bf442, type: 3}
+  sprite: {fileID: 21300000, guid: 3298750d5472da240a43fcf0e96e6c5c, type: 3}

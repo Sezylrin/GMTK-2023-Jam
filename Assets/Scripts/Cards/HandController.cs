@@ -34,34 +34,25 @@ public class HandController : MonoBehaviour
         {
             if (handSlotsAvailable[i])
             {
-                card.GetComponent<CardController>().hoverable = true;
-                card.transform.SetParent(handSlots[i].transform, false);
-                card.transform.localPosition = Vector3.zero;
+                Vector3 handSlotPosition = handSlots[i].transform.position;
+                Sequence sequence = DOTween.Sequence();
+                sequence.Append(card.transform.DOMove(handSlotPosition, 0.5f).SetEase(Ease.InOutQuad))
+                    .OnComplete(() =>
+                    {
+                        card.transform.SetParent(handSlots[i].transform, false);
+                        card.transform.localPosition = Vector3.zero;
+                        card.GetComponent<CardController>().hoverable = true;
+                    });
                 handSlotsAvailable[i] = false;
                 return;
             }
         }
     }
-
-    public void DiscardHand()
-    {
-        for (int i = 0; i < handSlotsAvailable.Count; i++)
-        {
-            if (!handSlotsAvailable[i])
-            {
-                GameObject cardToDisable = handSlots[i].transform.GetChild(0).gameObject;
-                deck.ReturnCardToDrawPile(cardToDisable);
-                cardToDisable.SetActive(false);
-                handSlotsAvailable[i] = true;
-            }
-        }
-    }
-
     public void PlayRandomCard()
     {
         if (!canPlayCard) return;
 
-        List<int> availableCards = new List<int>();
+        List<int> availableCards = new();
         for (int i = 0; i < handSlotsAvailable.Count; i++)
         {
             if (!handSlotsAvailable[i])
@@ -75,7 +66,14 @@ public class HandController : MonoBehaviour
             canPlayCard = false;
             int randomCardSelected = availableCards[UnityEngine.Random.Range(0, availableCards.Count)];
             GameObject selectedCard = handSlots[randomCardSelected].transform.GetChild(0).gameObject;
+            if (GameManager.instance.currentMana < selectedCard.GetComponent<CardController>().card.manaCost)
+            {
+                canPlayCard = true;
+                return;
+            }
+            GameManager.instance.UseMana(selectedCard.GetComponent<CardController>().card.manaCost);
 
+            BuffManager.instance.CastCard(selectedCard.GetComponent<CardController>().card, true);
             Vector3 startCardPosition = selectedCard.transform.position;
             Vector3 endCardPosition = playedCardSlot.transform.position;
 
@@ -84,22 +82,80 @@ public class HandController : MonoBehaviour
             Sequence sequence = DOTween.Sequence();
 
             selectedCard.GetComponent<CardController>().RemoveFromHand();
-            sequence.Append(DOTween.To(() => startCardPosition, x => selectedCard.transform.position = x, endCardPosition, tweenDuration).SetEase(Ease.InOutQuad))
-                .OnComplete(() =>
-                {
-                    selectedCard.transform.SetParent(playedCardSlot.transform, false);
-                    selectedCard.transform.localPosition = Vector3.zero;
-                    handSlotsAvailable[randomCardSelected] = true;
-                });
+            sequence.Append(DOTween.To(() => startCardPosition, x => selectedCard.transform.position = x, endCardPosition, tweenDuration).SetEase(Ease.InOutQuad));
+            handSlotsAvailable[randomCardSelected] = true;
 
-            sequence.AppendInterval(3.0f);
-            sequence.Append(selectedCard.GetComponent<CanvasGroup>().DOFade(0, 1.0f));
-            sequence.AppendCallback(() =>
+            switch (selectedCard.GetComponent<CardController>().card.type)
             {
-                selectedCard.transform.SetParent(buffZone.transform);
-                selectedCard.transform.localPosition = Vector3.zero;
-            });
-            sequence.Append(selectedCard.GetComponent<CanvasGroup>().DOFade(1, 1.0f));
+                case CardType.Powerup:
+                    MoveCardToBuffZone(selectedCard, sequence);
+                    return;
+                case CardType.Weapon:
+                case CardType.Spell:
+                    FadeCardOut(selectedCard, sequence);
+                    return;
+            }
         }
+    }
+
+    private void MoveCardToBuffZone(GameObject selectedCard, Sequence sequence)
+    {
+        sequence.AppendInterval(1.0f);
+        sequence.Append(selectedCard.GetComponent<CanvasGroup>().DOFade(0, 1.0f));
+        sequence.AppendCallback(() =>
+        {
+            selectedCard.transform.SetParent(buffZone.transform);
+            selectedCard.transform.localPosition = Vector3.zero;
+        });
+        sequence.Append(selectedCard.GetComponent<CanvasGroup>().DOFade(1, 1.0f))
+            .OnComplete(() =>
+            {
+                sequence.Kill();
+                canPlayCard = true;
+            });
+    }
+
+    private void FadeCardOut(GameObject selectedCard, Sequence sequence)
+    {
+        sequence.AppendInterval(1.0f);
+        sequence.Append(selectedCard.GetComponent<CanvasGroup>().DOFade(0, 1.0f))
+            .OnComplete(() =>
+            {
+                deck.ReturnCardToDrawPile(selectedCard);
+                selectedCard.GetComponent<CanvasGroup>().alpha = 1;
+                canPlayCard = true;
+            });
+    }
+
+    public bool HasAvailableSlot()
+    {
+        foreach (bool slotAvailable in handSlotsAvailable)
+        {
+            if (slotAvailable)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void DrawFullHand()
+    {
+        StartCoroutine(DrawFullHandCoroutine());
+        
+    }
+
+    private IEnumerator DrawFullHandCoroutine()
+    {
+        for (int i = 0; i < handSlots.Count; i++)
+        {
+            if (handSlotsAvailable[i])
+            {
+                deck.Draw();
+                yield return new WaitForSeconds(0.7f);
+            }
+        }
+        yield return new WaitForSeconds(0.3f);
+        GameUI.instance.ResetUI();
     }
 }

@@ -15,6 +15,10 @@ public enum CardInfo
     Fireball,
     Iceball,
     MeteorShower,
+
+    Dragon,
+    BlackWidow,
+    Cyclops,
 }
 
 public enum CardType
@@ -22,6 +26,7 @@ public enum CardType
     Powerup,
     Weapon,
     Spell,
+    Character,
 }
 
 [CreateAssetMenu(fileName ="Card", menuName="Cards")]

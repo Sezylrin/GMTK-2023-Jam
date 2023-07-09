@@ -15,8 +15,8 @@ MonoBehaviour:
   name: Sword
   description: A long sword to slice through enemies
   manaCost: 1
-  attack: 3
+  attack: 2
   health: 0
   type: 1
   info: 5
-  sprite: {fileID: 21300000, guid: 8a6a725f703f5ed4db0cdbee0929d033, type: 3}
+  sprite: {fileID: 21300000, guid: fd6baa2bded9f254b98b2bfffb79c3d9, type: 3}

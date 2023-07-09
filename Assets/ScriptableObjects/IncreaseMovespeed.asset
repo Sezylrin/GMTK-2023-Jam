@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: IncreaseMovespeed
   m_EditorClassIdentifier: 
   name: Move Speed
-  description: Increase move speed by []
+  description: Increase move speed of all characters
   manaCost: 1
   attack: 0
   health: 0
   type: 0
   info: 3
-  sprite: {fileID: 21300000, guid: 99c8439558e8195489fc90bd8c0bf442, type: 3}
+  sprite: {fileID: 21300000, guid: ec0a815654c21764aba005beace01a7a, type: 3}

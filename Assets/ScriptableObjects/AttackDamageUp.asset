@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: AttackDamageUp
   m_EditorClassIdentifier: 
   name: Attack Up
-  description: Increases attack damage by [0]
-  manaCost: 1
+  description: Increase attack damage of all cards
+  manaCost: 2
   attack: 0
   health: 0
   type: 0
   info: 2
-  sprite: {fileID: 21300000, guid: 99c8439558e8195489fc90bd8c0bf442, type: 3}
+  sprite: {fileID: 21300000, guid: 57426d4755137d24cadf777014d45fb2, type: 3}

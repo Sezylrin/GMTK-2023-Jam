@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 665c4cc4a8a4e2c43a8971656b1c2fbf, type: 3}
+  m_Name: SwordEnemy
+  m_EditorClassIdentifier: 
+  weaponObj: {fileID: 8683978232960437698, guid: 4de0e967e81b5f947a78706ce4c74c18, type: 3}
+  attackDelay: 4
+  attackSpeed: 0.9
+  damage: 2
+  Ydist: 1.2
+  attackDist: 2
+  attackPrepTime: 0.1
