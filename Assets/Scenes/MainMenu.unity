@@ -7963,7 +7963,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 74.899994, y: 14.9104}
+  m_AnchoredPosition: {x: 74.89996, y: 14.9104}
   m_SizeDelta: {x: 150, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1346937970
@@ -10001,6 +10001,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dragon
       objectReference: {fileID: 0}
+    - target: {fileID: 7693226954030506299, guid: 91e32e6dff7bce24e86d4f952e9ecd99, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9195942857111181956, guid: 91e32e6dff7bce24e86d4f952e9ecd99, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1b0b2d4d0e658de4ea69f696e819de83, type: 3}
     - target: {fileID: 9195942857111181956, guid: 91e32e6dff7bce24e86d4f952e9ecd99, type: 3}
       propertyPath: m_RaycastTarget
       value: 0
@@ -10024,9 +10032,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2073883037}
     m_Modifications:
+    - target: {fileID: 948959875146484545, guid: 4bfd7ed5435d0664a8e405cf43624db2, type: 3}
+      propertyPath: m_text
+      value: Increases attack damage
+      objectReference: {fileID: 0}
     - target: {fileID: 1442276424948917349, guid: 4bfd7ed5435d0664a8e405cf43624db2, type: 3}
       propertyPath: m_Name
-      value: Power Greed
+      value: Attack Up
       objectReference: {fileID: 0}
     - target: {fileID: 2357994012173931363, guid: 4bfd7ed5435d0664a8e405cf43624db2, type: 3}
       propertyPath: m_Pivot.x
@@ -10116,6 +10128,14 @@ PrefabInstance:
       propertyPath: m_RaycastTarget
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6074866085096604853, guid: 4bfd7ed5435d0664a8e405cf43624db2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7168358896976079685, guid: 4bfd7ed5435d0664a8e405cf43624db2, type: 3}
+      propertyPath: m_text
+      value: Attack Up
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8652694313601800240, guid: 4bfd7ed5435d0664a8e405cf43624db2, type: 3}
     m_RemovedGameObjects: []
@@ -10135,6 +10155,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2073883037}
     m_Modifications:
+    - target: {fileID: 401349995225667351, guid: 0bd02ad30c8cd534696fa287abb8dce2, type: 3}
+      propertyPath: m_text
+      value: A long sword to slice through enemies
+      objectReference: {fileID: 0}
     - target: {fileID: 2069824658163857459, guid: 0bd02ad30c8cd534696fa287abb8dce2, type: 3}
       propertyPath: m_Name
       value: Sword
@@ -10224,8 +10248,16 @@ PrefabInstance:
       value: -33.316
       objectReference: {fileID: 0}
     - target: {fileID: 5307943676069471068, guid: 0bd02ad30c8cd534696fa287abb8dce2, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: fd6baa2bded9f254b98b2bfffb79c3d9, type: 3}
+    - target: {fileID: 5307943676069471068, guid: 0bd02ad30c8cd534696fa287abb8dce2, type: 3}
       propertyPath: m_RaycastTarget
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6698192742342924515, guid: 0bd02ad30c8cd534696fa287abb8dce2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8119440274900665446, guid: 0bd02ad30c8cd534696fa287abb8dce2, type: 3}
@@ -10337,6 +10369,14 @@ PrefabInstance:
     - target: {fileID: 2418939322310207869, guid: 25cd59b5d6e3fd94e9eb29e5c5917a03, type: 3}
       propertyPath: m_Name
       value: Human
+      objectReference: {fileID: 0}
+    - target: {fileID: 4087389677847479897, guid: 25cd59b5d6e3fd94e9eb29e5c5917a03, type: 3}
+      propertyPath: m_text
+      value: An ordinary human yet full of great potential.
+      objectReference: {fileID: 0}
+    - target: {fileID: 7051634535439944109, guid: 25cd59b5d6e3fd94e9eb29e5c5917a03, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8395035533001339410, guid: 25cd59b5d6e3fd94e9eb29e5c5917a03, type: 3}
       propertyPath: m_RaycastTarget
