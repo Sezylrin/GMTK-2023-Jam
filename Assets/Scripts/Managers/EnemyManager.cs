@@ -27,7 +27,6 @@ public class EnemyManager : MonoBehaviour
         }
         else
         {
-            DontDestroyOnLoad(this);
             instance = this;
         }
     }
@@ -52,6 +51,22 @@ public class EnemyManager : MonoBehaviour
         {
             GameObject enemy = Instantiate(enemyTypes[Random.Range(0, enemyTypes.Count)], spawnCentre.position, Quaternion.identity);
             EnemyAI ai = enemy.GetComponent<EnemyAI>();
+            switch(4 - Mathf.CeilToInt((float)GameManager.instance.enemyHealth / 10f))
+            {
+                case(1):
+                    ai.SetDamage(Random.Range(1, 3));
+                    enemy.GetComponent<HealthComp>().SetHealth(true, Random.Range(4, 8));
+                    break;
+                case (2):
+                    ai.SetDamage(Random.Range(2, 4));
+                    enemy.GetComponent<HealthComp>().SetHealth(true, Random.Range(6, 10));
+                    break;
+                case (3):
+                    ai.SetDamage(Random.Range(3, 5));
+                    enemy.GetComponent<HealthComp>().SetHealth(true, Random.Range(8, 12));
+                    break;
+            }
+            ai.maxSpeed = Random.Range(3f, 5f);
             ai.ChangeWeapon(Weapons[Random.Range(0, Weapons.Count)]);
 
             Vector3 targetPos = spawnCentre.position;
@@ -94,9 +109,9 @@ public class EnemyManager : MonoBehaviour
     public void SpawnShop()
     {
         GameManager.instance.currentState = gameState.shop;
-        GameUI.instance.ResetUI();
         GameManager.instance.playerInfo.ResetStats();
         BuffManager.instance.StopDraw();
+        BuffManager.instance.StopEnemyDraw();
         BuffManager.instance.deck.RemoveAllPlayedCards();
     }
     

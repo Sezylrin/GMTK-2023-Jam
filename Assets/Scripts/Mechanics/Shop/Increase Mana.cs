@@ -43,7 +43,11 @@ public class IncreaseMana : MonoBehaviour
         if (!isOverlapping)
             return;
         if(GameManager.instance.UseToken(tokenCost))
+        {
             GameManager.instance.maxMana += manaIncrease;
+            GameManager.instance.SetMana();
+            GameUI.instance.ManaText();
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

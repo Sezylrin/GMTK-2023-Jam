@@ -193,7 +193,7 @@ public class PlayerController : MonoBehaviour
             hitHeart = true;
             GameManager.instance.lowerEnemyHealth(currentDamage);
             collision.GetComponentInChildren<TMP_Text>().text = GameManager.instance.enemyHealth.ToString();
-            Invoke("RemoveHeart", 2);
+            RemoveHeart();
         }
     }
     public void RemoveHeart()
@@ -204,20 +204,22 @@ public class PlayerController : MonoBehaviour
 
         Vector3 targetPos = currentPos;
         targetPos.y = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, 0)).y + 1;
-        heart.transform.DOMove(targetPos, 1.0f).SetEase(DG.Tweening.Ease.InOutQuad);
-        //Destroy();
+        heart.transform.DOMove(targetPos, 1.0f).SetEase(DG.Tweening.Ease.InOutQuad).OnComplete(()=>
+        {
+            Destroy(heart);
+        });
         EnemyManager.instance.SpawnShop();
     }
     public void ResetDamage()
     {
         currentDamage = damage + baseDamage;
-        attackText.text = currentDamage.ToString();
+        AttackDamageText();
     }
 
     public void AddDamage(int amount)
     {
         currentDamage += amount;
-        attackText.text = currentDamage.ToString();
+        AttackDamageText();
     }
 
     public void ResetStats()
@@ -284,5 +286,11 @@ public class PlayerController : MonoBehaviour
             attackDelay = weaponSO.attackDelay;
             attackSpeed = weaponSO.attackSpeed;
         }
+        AttackDamageText();
+    }
+
+    public void AttackDamageText()
+    {
+        attackText.text = currentDamage.ToString();
     }
 }

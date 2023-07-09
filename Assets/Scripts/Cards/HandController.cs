@@ -48,7 +48,6 @@ public class HandController : MonoBehaviour
             }
         }
     }
-
     public void PlayRandomCard()
     {
         if (!canPlayCard) return;
@@ -143,6 +142,7 @@ public class HandController : MonoBehaviour
     public void DrawFullHand()
     {
         StartCoroutine(DrawFullHandCoroutine());
+        
     }
 
     private IEnumerator DrawFullHandCoroutine()
@@ -155,5 +155,7 @@ public class HandController : MonoBehaviour
                 yield return new WaitForSeconds(0.7f);
             }
         }
+        yield return new WaitForSeconds(0.3f);
+        GameUI.instance.ResetUI();
     }
 }

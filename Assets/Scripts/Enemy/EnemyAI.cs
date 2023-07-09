@@ -62,6 +62,11 @@ public class EnemyAI : MonoBehaviour
         SetWeapon(weapon);
         SetDamageText();
     }
+    public void SetDamage(int amount)
+    {
+        damage = amount;
+        SetDamageText();
+    }
     void Update()
     {
         Attack();
@@ -95,7 +100,6 @@ public class EnemyAI : MonoBehaviour
         }
         else if (timers.time[(int)EnemyTimers.attackDelay].Equals(0))
         {
-            Debug.Log("attacking");
             currentState = EnemyState.readyAttack;
         }
     }
@@ -188,5 +192,13 @@ public class EnemyAI : MonoBehaviour
     public void SetChase()
     {
         currentState = EnemyState.chasing;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag(Tags.T_Player))
+        {
+            GameManager.instance.playerHealth.TakeDamage(damage);
+        }
     }
 }

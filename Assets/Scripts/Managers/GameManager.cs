@@ -29,7 +29,6 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            DontDestroyOnLoad(this);
             instance = this;
         }
         if (!player)
@@ -44,11 +43,12 @@ public class GameManager : MonoBehaviour
         {
             playerInfo = player.GetComponent<PlayerController>();
         }
+
+        maxMana = startingMana;
     }
     // Start is called before the first frame update
     void Start()
     {
-        maxMana = startingMana;
     }
 
     // Update is called once per frame
@@ -64,6 +64,7 @@ public class GameManager : MonoBehaviour
         else
         {
             tokens -= amount;
+            GameUI.instance.TokenText();
             return true;
         }
     }
@@ -73,7 +74,7 @@ public class GameManager : MonoBehaviour
 
         if (enemyHealth <= 0)
         {
-            //win
+            FindObjectOfType<SceneLoader>().LoadSceneIndex(3);
         }
     }
 
@@ -85,5 +86,6 @@ public class GameManager : MonoBehaviour
     public void UseMana(int amount)
     {
         currentMana -= amount;
+        GameUI.instance.ManaText();
     }
 }

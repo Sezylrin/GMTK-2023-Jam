@@ -24,6 +24,7 @@ public class Token : MonoBehaviour
         if (collision.gameObject.CompareTag(Tags.T_Player))
         {
             GameManager.instance.tokens++;
+            GameUI.instance.TokenText();
             Destroy(gameObject);
         }
     }

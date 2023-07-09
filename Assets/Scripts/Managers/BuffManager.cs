@@ -10,6 +10,8 @@ public class BuffManager : MonoBehaviour
     public List<Weapons> weapons = new List<Weapons>();
     public DeckController deck;
     public HandController hand;
+    public EnemyDeckController enemyDeck;
+    public int amountCasted = 0;
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -18,13 +20,36 @@ public class BuffManager : MonoBehaviour
         }
         else
         {
-            DontDestroyOnLoad(this);
             instance = this;
         }
     }
     void Start()
     {
         
+    }
+    public void StartEnemyDraw()
+    {
+        Invoke("attemptDrawEnemy", Random.Range(1f, 3f));
+    }
+
+    public void attemptDrawEnemy()
+    {
+        if (GameManager.instance.currentState == gameState.fighting)
+        {
+            enemyDeck.PlayRandomCard();
+            amountCasted++;
+            if (amountCasted < 4 - Mathf.CeilToInt(GameManager.instance.enemyHealth / 10))
+                Invoke("attemptDrawEnemy", Random.Range(1f, 3f));
+            else
+                StopEnemyDraw();
+        }
+
+    }
+
+    public void StopEnemyDraw()
+    {
+        amountCasted = 0;
+        CancelInvoke("attemptDrawEnemy");
     }
     public void StartDraw()
     {
@@ -161,6 +186,8 @@ public class BuffManager : MonoBehaviour
         int currentDamage = GameManager.instance.playerInfo.currentDamage;
         GameManager.instance.playerInfo.currentDamage = GameManager.instance.playerHealth.currentHealth;
         GameManager.instance.playerHealth.currentHealth = currentDamage;
+        GameManager.instance.playerInfo.AttackDamageText();
+        GameManager.instance.playerHealth.HealthDamageText();
         isSwitched = true;
     }
     [ContextMenu("SwitchWeaponSword")]

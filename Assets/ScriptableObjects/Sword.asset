@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Sword
   description: A long sword to slice through enemies
   manaCost: 1
-  attack: 3
+  attack: 2
   health: 0
   type: 1
   info: 5

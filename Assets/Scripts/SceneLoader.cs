@@ -24,7 +24,6 @@ public class SceneLoader : MonoBehaviour
         }
         else
         {
-            DontDestroyOnLoad(this);
             instance = this;
         }
     }
