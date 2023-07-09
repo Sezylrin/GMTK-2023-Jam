@@ -5,7 +5,6 @@ public class PlayerCardController : MonoBehaviour
 {
     [SerializeField] private List<Card> cardsInDeck;
     [SerializeField] private GameObject cardPrefab;
-    [SerializeField] private GameObject test;
 
     private DeckController deck;
     private HandController hand;
@@ -32,10 +31,6 @@ public class PlayerCardController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             deck.Draw();
-        }
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            hand.DiscardHand();
         }
         if (Input.GetKeyDown(KeyCode.Y))
         {

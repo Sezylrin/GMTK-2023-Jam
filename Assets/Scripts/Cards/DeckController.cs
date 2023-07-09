@@ -31,14 +31,17 @@ public class DeckController : MonoBehaviour
 
         ShuffleDeck();
     }
-    
+
     public void Draw()
     {
         if (cardsInDeck.Count == 0) return;
 
         GameObject randomCard = cardsInDeck[Random.Range(0, cardsInDeck.Count)];
         randomCard.SetActive(true);
-        hand.AddCardToHandSlot(randomCard);
+        randomCard.transform.SetAsLastSibling();
+        randomCard.transform.localEulerAngles = new Vector3(0, 180, 0);
+        randomCard.transform.DORotate(Vector3.zero, 0.5f).SetEase(Ease.InOutQuad)
+            .OnComplete(() => hand.AddCardToHandSlot(randomCard));
         cardsInDeck.Remove(randomCard);
     }
 
@@ -46,6 +49,7 @@ public class DeckController : MonoBehaviour
     {
         cardToReturn.SetActive(true);
         cardToReturn.transform.SetParent(gameObject.transform, false);
+        cardToReturn.transform.localPosition = new Vector3(-80, 0, 0);
         cardsInDeck.Add(cardToReturn);
     }
 
@@ -53,7 +57,9 @@ public class DeckController : MonoBehaviour
     {
         for (int i = buffZone.transform.childCount - 1; i >= 0; --i)
         {
-            buffZone.transform.GetChild(i).transform.SetParent(gameObject.transform, false);
+            GameObject card = buffZone.transform.GetChild(i).gameObject;
+            card.transform.SetParent(gameObject.transform, false);
+            card.transform.localPosition = new Vector3(-80, 0, 0);
         }
         ShuffleDeck();
     }

@@ -21,7 +21,7 @@ public class CardController : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     private float scaleAmount = 1.75f;
     private float originalCardNameFontSize, originalDescriptionFontSize, originalManaCostFontSize, originalHealthFontSize, originalAttackFontSize;
 
-    private Card card;
+    public Card card;
     public bool hoverable = false;
 
     private void Awake()
