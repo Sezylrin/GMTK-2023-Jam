@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1605953823939187295}
   - component: {fileID: 5106936819135986100}
   m_Layer: 0
-  m_Name: HumanMonsterCard
+  m_Name: BackgroundImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -249,7 +249,7 @@ Transform:
   m_Children:
   - {fileID: 5632755793317788220}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2337057013937548039
 GameObject:
