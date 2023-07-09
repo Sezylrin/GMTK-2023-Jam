@@ -6533,7 +6533,15 @@ MonoBehaviour:
   audioSource: {fileID: 960519941}
   audioClips:
   - {fileID: 8300000, guid: 70faf87bffe326744aba6454eaa6b605, type: 3}
+  - {fileID: 8300000, guid: a01e9dd8b5c4f0940a6200c030c80b55, type: 3}
+  - {fileID: 8300000, guid: 4caf835ac44a70e4fb86f838e6afb791, type: 3}
+  - {fileID: 8300000, guid: ef43bf31796145b44994dab20deb8602, type: 3}
+  - {fileID: 8300000, guid: 88383ea9704a70143bc693acaf162d23, type: 3}
+  - {fileID: 8300000, guid: dd50951273f51d14fb70357c3362b21b, type: 3}
+  - {fileID: 8300000, guid: 367cdb634e1b5e043b4e6bac488fe8a6, type: 3}
+  - {fileID: 8300000, guid: 168d5396a8e137e4d9e130ee7ad8ec84, type: 3}
   - {fileID: 8300000, guid: 295e308594d1c6648b670dee7b2795a9, type: 3}
+  - {fileID: 8300000, guid: c7ec4abfed8e9864d98eb195f5f3082e, type: 3}
   currentTrack: 0
   trackNameText: {fileID: 2039945763}
 --- !u!1 &1002326390

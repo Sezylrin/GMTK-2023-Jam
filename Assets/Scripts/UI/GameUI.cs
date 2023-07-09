@@ -13,6 +13,7 @@ public class GameUI : MonoBehaviour
     public TMP_Text manaText;
     public TMP_Text tokenText;
     public bool isStart = true;
+    public AudioSource audioSource;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -49,6 +50,7 @@ public class GameUI : MonoBehaviour
 
     public void StartRound()
     {
+        audioSource.Play();
         switch (4 - Mathf.CeilToInt((float)GameManager.instance.enemyHealth / 10f))
         {
             case (1):

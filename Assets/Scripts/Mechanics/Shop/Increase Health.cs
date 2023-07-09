@@ -10,6 +10,7 @@ public class IncreaseHealth : MonoBehaviour
     private PlayerInputs inputs;
     public int healthIncrease;
     public int tokenCost;
+    public AudioSource audioSource;
     private void Awake()
     {
 
@@ -45,6 +46,7 @@ public class IncreaseHealth : MonoBehaviour
             HealthComp temp = GameManager.instance.player.GetComponent<HealthComp>();
             temp.maxHealth += healthIncrease;
             temp.heal(healthIncrease);
+            audioSource.Play();
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)

@@ -10,6 +10,7 @@ public class IncreaseMana : MonoBehaviour
     private PlayerInputs inputs;
     public int manaIncrease;
     public int tokenCost;
+    public AudioSource audioSource;
     private void Awake()
     {
         inputs = new PlayerInputs();
@@ -47,6 +48,7 @@ public class IncreaseMana : MonoBehaviour
             GameManager.instance.maxMana += manaIncrease;
             GameManager.instance.SetMana();
             GameUI.instance.ManaText();
+            audioSource.Play();
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)

@@ -39,6 +39,8 @@ public class PlayerController : MonoBehaviour
     public Animator anim;
     public TMP_Text attackText;
     public List<GameObject> particles = new List<GameObject>();
+    public AudioSource audioSource;
+    public AudioClip damageOther;
 
     [Header("Debug Values")]
 
@@ -187,6 +189,7 @@ public class PlayerController : MonoBehaviour
             {
                 enemiesHit.Add(collision.gameObject);
                 collision.GetComponent<HealthComp>().TakeDamage(currentDamage);
+                audioSource.Play();
             }
         }
         if (collision.gameObject.CompareTag(Tags.T_Heart) && !hitHeart)
@@ -195,11 +198,11 @@ public class PlayerController : MonoBehaviour
             GameManager.instance.lowerEnemyHealth(currentDamage);
             collision.GetComponentInChildren<TMP_Text>().text = GameManager.instance.enemyHealth.ToString();
             RemoveHeart();
+            audioSource.Play();
         }
     }
     public void RemoveHeart()
     {
-        hitHeart = false;
         GameObject heart = GameObject.FindWithTag(Tags.T_Heart);
         Vector3 currentPos = Vector2.up * 2.5f;
 
@@ -207,6 +210,7 @@ public class PlayerController : MonoBehaviour
         targetPos.y = Camera.main.ViewportToWorldPoint(new Vector3(0, 1, 0)).y + 1;
         heart.transform.DOMove(targetPos, 1.0f).SetEase(DG.Tweening.Ease.InOutQuad).OnComplete(()=>
         {
+            hitHeart = false;
             Destroy(heart);
         });
         EnemyManager.instance.SpawnShop();

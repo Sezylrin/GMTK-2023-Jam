@@ -45,6 +45,8 @@ public class EnemyAI : MonoBehaviour
     public Animator anim;
     public TMP_Text attackText;
     public List<GameObject> particles = new List<GameObject>();
+    public AudioSource audioSource;
+    public AudioClip DamagePlayer;
 
     [Header("Debug")]
     [SerializeField]
@@ -200,7 +202,11 @@ public class EnemyAI : MonoBehaviour
     {
         if (collision.CompareTag(Tags.T_Player))
         {
-            GameManager.instance.playerHealth.TakeDamage(damage);
+            if (GameManager.instance.playerHealth.TakeDamage(damage))
+            {
+                audioSource.clip = DamagePlayer; 
+                audioSource.Play();
+            }
         }
     }
 }

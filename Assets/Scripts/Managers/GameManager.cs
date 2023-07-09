@@ -49,8 +49,17 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        InvokeRepeating("playTracks", 0, 210);
     }
 
+    public void playTracks()
+    {
+        BGMManager.instance.PlayTrack(Random.Range(1, BGMManager.instance.audioClips.Length));
+    }
+    private void OnDestroy()
+    {
+        CancelInvoke();
+    }
     // Update is called once per frame
     void Update()
     {

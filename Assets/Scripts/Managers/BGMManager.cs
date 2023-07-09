@@ -42,7 +42,10 @@ public class BGMManager : MonoBehaviour
             ChangeTrackPlaying();
         }
     }
-
+    private void Update()
+    {
+        
+    }
     public void StopTrack()
     {
         audioSource.Stop();

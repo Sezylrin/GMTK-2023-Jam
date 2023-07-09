@@ -10,6 +10,8 @@ public class HealthComp : MonoBehaviour
     public int currentHealth;
     public TMP_Text healthText;
     public bool canTakeDamage = true;
+    public AudioSource audioSource;
+    public AudioClip deathClip;
     void Start()
     {
         SetHealth(false);
@@ -28,17 +30,19 @@ public class HealthComp : MonoBehaviour
         
     }
 
-    public void TakeDamage(int value)
+    public bool TakeDamage(int value)
     {
         
         if (gameObject.CompareTag(Tags.T_Player))
         {
-            if(canTakeDamage)
+            if (canTakeDamage)
+            {
                 canTakeDamage = false;
+            }
             else
             {
                 Invoke("ResetTakeDamage", 1.5f);
-                return;
+                return false;
             }    
         }
         currentHealth -= value;
@@ -52,6 +56,7 @@ public class HealthComp : MonoBehaviour
         {
             HealthDamageText();
         }
+        return true;
     }
 
     public void ResetTakeDamage()
@@ -77,6 +82,8 @@ public class HealthComp : MonoBehaviour
     {
         if (gameObject.CompareTag(Tags.T_Enemy))
         {
+            audioSource.clip = deathClip;
+            audioSource.Play();
             EnemyManager.instance.spawnedEnemies.Remove(gameObject);
             EnemyManager.instance.ReduceEnemy();
             Instantiate(EnemyManager.instance.tokenObj, transform.position + new Vector3(Random.Range(-1f,1f), Random.Range(-1f, 1f)), Quaternion.identity);

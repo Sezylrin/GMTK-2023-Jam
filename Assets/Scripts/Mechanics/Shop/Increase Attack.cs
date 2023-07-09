@@ -9,6 +9,7 @@ public class IncreaseAttack : MonoBehaviour
     private PlayerInputs inputs;
     public int increaseAttack;
     public int tokenCost;
+    public AudioSource audioSource;
     private void Awake()
     {
 
@@ -44,6 +45,7 @@ public class IncreaseAttack : MonoBehaviour
             PlayerController temp = GameManager.instance.player.GetComponent<PlayerController>();
             temp.baseDamage += increaseAttack;
             temp.ResetDamage();
+            audioSource.Play();
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)

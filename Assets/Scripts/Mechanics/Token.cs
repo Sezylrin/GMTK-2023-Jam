@@ -5,7 +5,10 @@ using UnityEngine;
 public class Token : MonoBehaviour
 {
     // Start is called before the first frame update
-
+    public AudioSource audioSource;
+    public List<AudioClip> clips;
+    public SpriteRenderer render;
+    public CircleCollider2D col;
     void Start()
     {    
     }
@@ -23,9 +26,18 @@ public class Token : MonoBehaviour
     {
         if (collision.gameObject.CompareTag(Tags.T_Player))
         {
+            audioSource.clip = clips[Random.Range(0, 2)];
+            audioSource.Play();
             GameManager.instance.tokens++;
             GameUI.instance.TokenText();
-            Destroy(gameObject);
+            render.enabled = false;
+            col.enabled = false;
+            Invoke("DestroySelf", 0.3f);
         }
+    }
+
+    public void DestroySelf()
+    {
+        Destroy(gameObject);
     }
 }
